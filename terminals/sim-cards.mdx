@@ -1,7 +1,7 @@
 ---
 title: "Manage SIM Cards for POS Terminal Connectivity"
 sidebarTitle: "SIM Cards"
-description: "Track and assign SIM cards to POS terminals in Lango. Manage SIM provider details, ICCID, and network type for every SIM in your terminal estate."
+description: "Track and assign SIM cards to POS terminals in Lango. Manage SIM provider details, IMSI, and assignment status for every SIM in your terminal estate."
 ---
 
 SIM cards provide the cellular connectivity that allows POS terminals to communicate with your acquiring infrastructure over 2G, 3G, or 4G networks. The SIM Card Management module gives you a complete register of every SIM in your estate — whether it is sitting in unassigned stock, installed in a deployed terminal, or blocked from use. You can add new SIMs, assign them to specific terminals via their device profile, update provider details, and track which outlet and customer each SIM is currently serving.
@@ -128,5 +128,5 @@ The SIM provider options available when adding or editing a SIM card are maintai
 If you need to add a new carrier or MVNO — for example, when onboarding terminals on a new network — ask your system administrator to create the provider entry in Master Data before you register the SIM cards.
 
 <Tip>
-  Use the **SIM Provider** and **Status** filters in the SIM card list to audit your estate by network. For example, filtering by `Status: assigned` and a specific provider gives you a count of all deployed SIMs on that network — useful for reconciling with your carrier's billing reports. To see live network signal quality and connectivity status for deployed terminals, visit the [Terminal Telemetry dashboard](/dashboard/terminal-telemetry).
+  Use the **SIM Provider** and **Status** filters in the SIM card list to audit your estate by network. For example, filtering by `Status: assigned` and a specific provider gives you a count of all deployed SIMs on that network — useful for reconciling with your carrier's billing reports. To see live connectivity status for deployed terminals, visit the [Terminals Telemetry dashboard](/dashboard/terminal-telemetry).
 </Tip>

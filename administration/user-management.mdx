@@ -1,5 +1,5 @@
 ---
-title: "Manage Portal Users and Their Account Settings"
+title: "Manage Portal Users, Workgroups, and Account Settings"
 sidebarTitle: "User Management"
 description: "Add, edit, deactivate, and bulk-import users in the Lango portal. Assign workgroups and roles to control what each user can see and do."
 ---
@@ -7,9 +7,9 @@ description: "Add, edit, deactivate, and bulk-import users in the Lango portal. 
 The **User Management** section of the Lango portal is your central hub for controlling who can access the system and what they are permitted to do. From here you can create individual users, update their details, toggle their active status, and bulk-import entire teams using a structured spreadsheet. Every user must belong to a workgroup, which ties together the roles and permissions that define their access level across the portal.
 
 <Note>
-  You need the `canViewUser` permission to see the Users list. Adding, editing,
-  or deactivating users requires `canCreateUser`, `canUpdateUser`, or
-  `canDeleteUser` respectively.
+  You need the `lite.user.view` permission to see the Users list. Adding, editing,
+  or deactivating users requires `lite.user.create`, `lite.user.update`, or
+  `lite.user.delete` respectively.
 </Note>
 
 ---
@@ -37,7 +37,7 @@ Use the search bar above the table to filter users by username, email, phone num
 ## Creating a user
 
 <Note>
-  Only users with the `canCreateUser` permission see the **Add User** button.
+  Only users with the `lite.user.create` permission see the **Add User** button.
 </Note>
 
 <Steps>
@@ -166,13 +166,9 @@ Use the bulk upload feature to onboard multiple users at once using a CSV or Exc
 
 Every user must belong to at least one workgroup. The workgroup determines which permissions the user inherits and therefore which parts of the portal they can access and what actions they can perform.
 
-<CardGroup cols={2}>
-  <Card title="Assign during creation" icon="user-plus">
-    Select the appropriate workgroup when creating a new user in the **Add User** form.
-  </Card>
-  <Card title="Reassign from the user record" icon="arrows-rotate">
-    Open an existing user's record, update the **Workgroup** field, and save to change their access level immediately.
-  </Card>
-</CardGroup>
+You can assign workgroups in two ways:
+
+- **During creation** — select the appropriate workgroup when completing the **Add User** form.
+- **From an existing user record** — open the user's record, update the **Workgroup** field, and save to change their access level immediately.
 
 To create or modify workgroups, see [Roles & Permissions](/administration/roles-and-permissions).

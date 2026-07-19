@@ -7,7 +7,7 @@ description: "Run reports on your POS terminal fleet in Lango — track total te
 The Terminal Reports section in Lango gives bank operations teams complete visibility over their POS device estate. You can track the total number of terminals registered in the system, review which devices are currently assigned to merchants, identify terminals that have been returned or decommissioned, and monitor real-time device health through the Terminal Status report. Together these reports support fleet planning, capacity reviews, SLA compliance, and device lifecycle management — all exportable in CSV, Excel, or PDF.
 
 <Note>
-  Access to terminal reports requires the `lite.reports.view` permission (`canViewReports`). Contact your system administrator if the Reports menu is not visible in your sidebar.
+  Access to terminal reports requires the `lite.reports.view` permission. Contact your system administrator if the Reports menu is not visible in your sidebar.
 </Note>
 
 ## Navigating to Terminal Reports
@@ -16,7 +16,7 @@ In the left-hand sidebar, click **Reports** to expand the reports menu. Terminal
 
 ## Total Terminals Report
 
-The **Total Terminals** report (`/reports/terminals/total`) provides a complete inventory of every terminal registered in Lango, regardless of its current deployment status. Use this report to answer questions such as "How many devices has the bank deployed in a given period?" or "Which branch holds the highest concentration of devices?"
+The **Total Terminals** report (`/reports/terminals/total-terminals`) provides a complete inventory of every terminal registered in Lango, regardless of its current deployment status. Use this report to answer questions such as "How many devices has the bank deployed in a given period?" or "Which branch holds the highest concentration of devices?"
 
 ### Columns
 
@@ -33,14 +33,18 @@ The **Total Terminals** report (`/reports/terminals/total`) provides a complete 
 
 ## Assigned Terminals Report
 
-The **Assigned Terminals** report (`/reports/terminals/assigned`) lists all terminals currently in an **ASSIGNED** state — meaning they have been formally deployed to a merchant. This report includes assignment metadata that the Total Terminals report does not, making it the right tool for tracking when devices were handed over and by whom.
+The **Assigned Terminals** report (`/reports/terminals/assigned-terminals`) lists all terminals currently in an **ASSIGNED** state — meaning they have been formally deployed to a merchant. This report includes assignment metadata that the Total Terminals report does not, making it the right tool for tracking when devices were handed over and by whom.
 
-### Additional Columns (beyond Total Terminals)
+### Columns
 
 | Column | Description |
 |---|---|
+| **Date Created** | The delivery date when the terminal was first recorded in the system. |
 | **Application Type** | Whether the assignment was for a **New** merchant or a terminal **Replacement**. |
+| **Merchant ID (MID)** | The Merchant ID assigned to the device profile. |
+| **Merchant Name** | The name of the merchant the terminal is assigned to. |
 | **Customer Type** | The customer type classification of the assigned merchant. |
+| **Terminal Serial Number** | The device's serial number. |
 | **TID** | The terminal identifier assigned to the device profile. |
 | **Date Assigned** | The timestamp when the terminal was formally assigned to the merchant. |
 | **Assigned By** | The portal username of the operator who performed the assignment. |
@@ -48,7 +52,7 @@ The **Assigned Terminals** report (`/reports/terminals/assigned`) lists all term
 
 ## Returned / Closed Terminals Report
 
-The **Returned / Closed Terminals** report (`/reports/terminals/returned-closed`) surfaces terminals in a **DECOMMISSION** or **INREPAIR** status — devices that have been pulled from service and are either awaiting repair or permanently retired. Use this report to manage device retrieval workflows and track your fleet's attrition rate.
+The **Returned / Closed Terminals** report (`/reports/terminals/returned-closed-terminals`) surfaces terminals in a **DECOMMISSION** or **INREPAIR** status — devices that have been pulled from service and are either awaiting repair or permanently retired. Use this report to manage device retrieval workflows and track your fleet's attrition rate.
 
 The report includes the same columns as the Total Terminals report, with the **Date Returned/Closed** replacing the deployment date to reflect when the terminal was last updated to a closed state.
 
@@ -58,7 +62,7 @@ The report includes the same columns as the Total Terminals report, with the **D
 
 ## Terminal Status Report
 
-The **Terminal Status** report (`/reports/terminals/terminal-status`) gives you a real-time health snapshot of every terminal in the estate. It is the most comprehensive terminal report for day-to-day operational monitoring, combining device status, merchant context, and communication timestamps in a single view.
+The **Terminal Status** report (`/reports/terminals/terminal-status-reports`) gives you a real-time health snapshot of every terminal in the estate. It is the most comprehensive terminal report for day-to-day operational monitoring, combining device status, merchant context, and communication timestamps in a single view.
 
 ### Status Values
 
@@ -82,7 +86,7 @@ The **Terminal Status** report (`/reports/terminals/terminal-status`) gives you 
 | **Region Name** | The bank region linked to the merchant's branch. |
 | **Status** | The terminal's lifecycle status: ASSIGNED, DECOMMISSION, INREPAIR, or INSTORE. |
 | **Branch Name** | The bank branch linked to the merchant. |
-| **Last Communication Timestamp** | The most recent time the device contacted the platform, drawn from the device snapshot. |
+| **Last Communication Timestamp** | The most recent time the device contacted the platform. |
 | **Last Transaction Timestamp** | The timestamp of the most recent transaction processed by the terminal. |
 
 ## Filtering Terminal Reports

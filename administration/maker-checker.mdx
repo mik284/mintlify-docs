@@ -50,10 +50,10 @@ The **Maker Checker Configuration** page lets you define which specific operatio
     Click **Create Maker Checker Configuration**. A guided form with four sequential steps appears.
   </Step>
   <Step title="Select the schema">
-    Choose the **Schema** — this identifies the resource or module (for example, a customer, terminal, or outlet schema) that requires dual approval.
+    Choose the **Schema** — this identifies the type of record (for example, customer, terminal, or outlet) whose changes will require dual approval.
   </Step>
   <Step title="Select the maker">
-    Choose the portal user who will act as the **Maker** for this schema. This is the user whose actions on this resource will be queued for approval.
+    Choose the portal user who will act as the **Maker** for this record type. This is the user whose actions on these records will be held in the approval queue.
   </Step>
   <Step title="Select the checker">
     Choose the portal user who will act as the **Checker**. The checker must be a different user from the maker — the system prevents the same user from being assigned to both roles in a single configuration.
@@ -62,7 +62,7 @@ The **Maker Checker Configuration** page lets you define which specific operatio
     Optionally, assign a **Substitute Checker** who can approve tasks when the primary checker is unavailable. The substitute must be different from both the maker and the primary checker.
   </Step>
   <Step title="Save the configuration">
-    Click **Save**. The new rule takes effect immediately for any subsequent actions performed by the designated maker on the selected schema.
+    Click **Save**. The new rule takes effect immediately for any subsequent actions performed by the designated maker on the selected record type.
   </Step>
 </Steps>
 
@@ -92,27 +92,19 @@ Navigate to **Tasks** in the left sidebar. The table shows:
 
 <Note>
   The **Tasks** menu is only visible to users who have the `lite.stateChange.view`
-  permission **and** whose account has maker-checker enabled (`isMakerChecker = true`).
+  permission **and** whose account has been configured as a maker or checker in at least one maker-checker rule.
 </Note>
 
 ---
 
 ## Task statuses
 
-<CardGroup cols={2}>
-  <Card title="PENDING" icon="clock">
-    The task has been submitted by the maker and is awaiting review by the checker. The underlying change has **not** yet been applied to the system.
-  </Card>
-  <Card title="APPROVED" icon="circle-check">
-    The checker approved the task. The change has been applied to the live system.
-  </Card>
-  <Card title="DECLINED" icon="circle-xmark">
-    The checker rejected the task. The change was not applied. A reason is recorded against the task.
-  </Card>
-  <Card title="AMMEND" icon="pen-to-square">
-    The checker returned the task to the maker for correction. The maker must revise their submission and resubmit.
-  </Card>
-</CardGroup>
+| Status | Meaning |
+| ----------- | ------- |
+| **PENDING** | The task has been submitted by the maker and is awaiting review by the checker. The underlying change has **not** yet been applied to the system. |
+| **APPROVED** | The checker approved the task. The change has been applied to the live system. |
+| **DECLINED** | The checker rejected the task. The change was not applied. A reason is recorded against the task. |
+| **AMMEND** | The checker returned the task to the maker for correction. The maker must revise their submission and resubmit. |
 
 ---
 

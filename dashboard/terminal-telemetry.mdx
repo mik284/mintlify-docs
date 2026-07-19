@@ -4,15 +4,15 @@ sidebarTitle: "Terminal Telemetry"
 description: "The Terminals Telemetry dashboard shows live status, network connectivity, temperature, and GPS location of every POS terminal in your estate."
 ---
 
-The Terminals Telemetry view gives your operations team an immediate, live picture of every POS terminal deployed across your estate. The moment you open the view, the platform connects to a live data channel and streams telemetry directly from your devices — covering connectivity, hardware health, PIN pad status, and precise GPS location. Because data arrives through a persistent channel, you never need to manually refresh the page; the figures and map update automatically as conditions change in the field.
+The Terminals Telemetry view gives your operations team an immediate, live picture of every POS terminal deployed across your estate. The moment you open the view, the platform begins streaming telemetry directly from your devices — covering connectivity, hardware health, PIN pad status, and precise GPS location. All metrics and the map update automatically as conditions change in the field, so you never need to manually refresh the page.
 
 <Note>
-  Telemetry data is delivered over a live channel (`dashboard:all_devices`). All metrics and the map update automatically whenever the platform receives a new reading from your terminals. You do not need to refresh the page.
+  All metrics and the map update automatically whenever the platform receives a new reading from your terminals. You do not need to refresh the page.
 </Note>
 
 ## Accessing Terminals Telemetry
 
-Navigate to **Dashboards** in the left sidebar. The platform lands you on the Terminals Telemetry view by default. If you are on the Transactions Dashboard, click the **Terminals Dashboard** tab to switch back.
+Navigate to **Dashboards** in the left sidebar. The platform lands you on the Terminals Telemetry view by default. If you are viewing the Transactions Dashboard, select **Terminals Telemetry** from the sidebar under **Dashboards** to return to this view.
 
 This view requires the `canViewTerminalDashboard` permission. Contact your administrator if the view is not available to you.
 
@@ -34,23 +34,23 @@ The **Terminal Uptime** donut chart visualises the proportion of active, inactiv
 
 The **Terminal By Network** chart breaks down your online terminals by the type of network connection each device is using.
 
-| Network type | Field |
+| Network type | Description |
 |---|---|
-| 2G | `deviceNetworkOnline2` |
-| 3G | `deviceNetworkOnline3` |
-| 4G | `deviceNetworkOnline4` |
-| 5G | `deviceNetworkOnline5` |
-| Wi-Fi | `deviceNetworkOnlineWifi` (transport type `TRANSPORT_WIFI`) |
+| 2G | Terminals connected via a 2G mobile data network. |
+| 3G | Terminals connected via a 3G mobile data network. |
+| 4G | Terminals connected via a 4G/LTE mobile data network. |
+| 5G | Terminals connected via a 5G mobile data network. |
+| Wi-Fi | Terminals connected via a local wireless (Wi-Fi) network. |
 
-The **Offline Devices** count (`deviceOffline`) reflects terminals that have lost all network connectivity and are currently unreachable. Use this figure to prioritise field support calls.
+The **Offline Devices** count reflects terminals that have lost all network connectivity and are currently unreachable. Use this figure to prioritise field support calls.
 
 ## PIN Pad Status
 
-The **Online & Offline PIN Validation** chart shows the split between PIN pads that are currently communicating (`pinOnline`) and those that are not (`pinOffline`). A high offline PIN count can indicate tamper events, hardware faults, or connectivity problems specifically affecting PIN pad modules rather than the main terminal unit.
+The **Online & Offline PIN Validation** chart shows the split between PIN pads that are currently communicating and those that are not. A high offline PIN count can indicate tamper events, hardware faults, or connectivity problems specifically affecting PIN pad modules rather than the main terminal unit.
 
 ## Temperature Monitoring
 
-The **Terminal Temperature Status** bar chart groups your terminals into three thermal bands using the `deviceTempData` readings received from each device:
+The **Terminal Temperature Status** bar chart groups your terminals into three thermal bands based on temperature readings received from each device:
 
 | Band | What it means |
 |---|---|
@@ -73,11 +73,10 @@ The **All Terminals Distribution** map displays a live GPS cluster map of every 
 | 🟡 Yellow | Idle |
 | 🔵 Blue | TMS Inactive |
 
-Each pin on the map represents a terminal and carries the following data from the live channel:
+Each pin on the map represents a terminal. Clicking a pin opens a popup showing:
 
 - **Serial number** — the hardware serial number of the device
 - **IMEI** — the unique modem identifier
-- **Transport** — the active network transport (e.g. `FOURG`, `TRANSPORT_WIFI`)
 - **Latitude / Longitude** — the last reported GPS coordinates
 - **Status** — the current operational status of the terminal
 

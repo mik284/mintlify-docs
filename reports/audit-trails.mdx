@@ -1,5 +1,5 @@
 ---
-title: "Audit Trails: Track All System Activity in Lango"
+title: "Audit Trails: Full Activity Log for Compliance Teams"
 sidebarTitle: "Audit Trails"
 description: "The Audit Trails report logs every create, update, and delete action performed in Lango, showing the user responsible, the timestamp, and the changed data."
 ---
@@ -20,9 +20,9 @@ Every row in the audit log represents a single system event. The table contains 
 
 | Column | Description |
 |---|---|
-| **User** | The portal username (`createdBy`) of the person who triggered the action. |
+| **User** | The portal username of the person who triggered the action. |
 | **Action** | A description of what was done — for example, `Created Terminal`, `Updated Customer`, or `Deleted Outlet`. |
-| **Entity** | The type of record affected, derived from the system context (e.g., `Terminal`, `Customer`, `Role`). |
+| **Entity** | The type of record affected (e.g., `Terminal`, `Customer`, `Role`). |
 | **Inserted At** | The UTC timestamp, displayed in your local timezone, of when the action was recorded. |
 | **Updated At** | The timestamp of the most recent update to that audit record. |
 | **Client** | The application client used to perform the action. |
@@ -37,8 +37,10 @@ The audit log supports several inline search filters to help you narrow results 
 
 - **User** — Filter by the username of a specific operator.
 - **Action** — Filter by action keyword (e.g., search `delete` to see all deletion events).
-- **IP Address, Location, Platform** — Filter by connection metadata.
-- **Date Range (Inserted At / Updated At)** — Select a start and end date to restrict the log to a specific period. The date picker transforms your selection into `fromDate` and `toDate` parameters automatically.
+- **IP Address** — Filter by the IP address from which actions originated.
+- **Location** — Filter by geographic location.
+- **Platform** — Filter by the device or platform used.
+- **Date Range (Inserted At / Updated At)** — Select a start and end date to restrict the log to a specific period.
 
 Apply multiple filters at once and click **Search** to refresh the results.
 
@@ -46,20 +48,14 @@ Apply multiple filters at once and click **Search** to refresh the results.
 
 The **Changes** column reveals the full detail of what each audit entry recorded. Click the eye icon on any row to open the change detail panel. Lango surfaces three distinct types of audit entries:
 
-<CardGroup cols={3}>
-  <Card title="Item Creation" icon="circle-plus">
-    Shows all field values that were set when the record was first created, so you can see the exact initial state.
-  </Card>
-  <Card title="Item Update" icon="pen-to-square">
-    Shows a before-and-after comparison of every field that changed, so you can see the previous value alongside the new value.
-  </Card>
-  <Card title="Item Deletion" icon="trash">
-    Shows the final state of the record at the moment it was deleted, giving you a recoverable snapshot of what was removed.
-  </Card>
-</CardGroup>
+| Entry type | What it shows |
+|---|---|
+| **Creation** | All field values that were set when the record was first created, so you can see the exact initial state. |
+| **Update** | A before-and-after comparison of every field that changed, so you can see the previous value alongside the new value. |
+| **Deletion** | The final state of the record at the moment it was deleted, giving you a recoverable snapshot of what was removed. |
 
 <Tip>
-  When investigating a potential data issue, use the **Item Update** history view to confirm exactly which field was changed, by whom, and when — without needing to contact engineering.
+  When investigating a potential data issue, open the change detail panel on any **Update** entry to confirm exactly which field was changed, by whom, and when — without needing to contact engineering.
 </Tip>
 
 ## Exporting Audit Data
@@ -87,4 +83,4 @@ You can export any filtered view of the audit log in CSV, Excel, or PDF format. 
 
 ## Permissions
 
-Access to the Audit Trails report requires the `lite.reports.view` permission (`canViewReports`). If the **Reports** menu item is not visible in your sidebar, contact your system administrator to request the appropriate role assignment.
+Access to the Audit Trails report requires the `lite.reports.view` permission. If the **Reports** menu item is not visible in your sidebar, contact your system administrator to request the appropriate role assignment.

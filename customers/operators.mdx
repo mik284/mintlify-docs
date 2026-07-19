@@ -31,17 +31,15 @@ The operators table shows the following information for each operator:
 
 | Column | Description |
 |---|---|
-| **Name** | The operator's full name. |
-| **Username** | The operator's login username on the POS terminal. |
 | **Operator Code** | The unique code assigned to this operator. |
-| **Phone Number** | The operator's registered phone number. |
-| **Email** | The operator's email address. |
-| **Gender** | The operator's gender, as recorded during setup. |
+| **Operator Status** | Whether the operator is **Active** or **Inactive**. |
+| **Username** | The operator's login username on the POS terminal. |
 | **Identification Type** | The type of ID used to verify the operator (e.g., National ID, Passport). |
 | **Identification Number** | The operator's ID document number. |
-| **POS Permissions** | The POS role assigned to this operator, which determines what they can do on the terminal. |
-| **Status** | Whether the operator is **Active** or **Inactive**. |
-| **Date Created** | When the operator record was created. |
+| **Gender** | The operator's gender, as recorded during setup. |
+| **Email** | The operator's email address. |
+| **Phone Number** | The operator's registered phone number. |
+| **Date Creation** | When the operator record was created. |
 
 <Note>
   You need the `canViewOperator` permission to see the Operators tab and its contents.
@@ -51,7 +49,7 @@ The operators table shows the following information for each operator:
 
 ## Adding an operator
 
-To add a new operator to a terminal, navigate to the terminal profile as described above and use the **Add Operator** button in the toolbar.
+To add a new operator to a terminal, navigate to the terminal profile as described above and use the **Create Operator** button in the toolbar.
 
 <Steps>
   <Step title="Open the terminal profile">
@@ -60,8 +58,8 @@ To add a new operator to a terminal, navigate to the terminal profile as describ
   <Step title="Go to the Operators tab">
     Click the **Operators** tab within the terminal profile detail page.
   </Step>
-  <Step title="Click Add Operator">
-    Click the **Add Operator** button in the top-right corner of the operators table. This button is visible only to users with the `canCreateOperator` permission.
+  <Step title="Click Create Operator">
+    Click the **Create Operator** button in the top-right corner of the operators table. This button is visible only to users with the `canCreateOperator` permission.
   </Step>
   <Step title="Fill in the operator details">
     Complete the form with the following information:

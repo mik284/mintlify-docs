@@ -111,28 +111,28 @@ Click any **Customer Name** link in the table to open that merchant's detail pag
 Below the summary, a tabbed panel labelled **Customer Details** provides access to all sub-sections of the customer record:
 
 <CardGroup cols={2}>
-  <Card title="Bio Details" icon="id-card">
+  <Card title="Bio Details" icon="id-card" href="/customers/managing-customers">
     Extended business information captured during onboarding, including company registration details and additional form fields configured by your institution.
   </Card>
-  <Card title="Dashboard" icon="chart-line">
+  <Card title="Dashboard" icon="chart-line" href="/customers/managing-customers">
     A real-time summary of transaction volumes and terminal health for this customer. Visible only to users with the `canViewTransaction` permission.
   </Card>
-  <Card title="Outlets" icon="store">
+  <Card title="Outlets" icon="store" href="/customers/outlets">
     All physical or logical business locations registered under this customer. Click an outlet name to manage its terminals, device profiles, and operators.
   </Card>
-  <Card title="Terminals" icon="credit-card">
+  <Card title="Terminals" icon="credit-card" href="/terminals/terminal-management">
     A list of all POS terminals assigned to this customer across all outlets.
   </Card>
-  <Card title="Transactions" icon="receipt">
+  <Card title="Transactions" icon="receipt" href="/transactions/viewing-transactions">
     The full transaction history for this customer. Visible only to users with the `canViewTransaction` permission.
   </Card>
-  <Card title="Terminal Information" icon="server">
+  <Card title="Terminal Information" icon="server" href="/terminals/terminal-management">
     A real-time estate dashboard showing the live connection status and health of each terminal.
   </Card>
-  <Card title="Customer Users" icon="users">
+  <Card title="Customer Users" icon="users" href="/customers/managing-customers">
     Portal users linked to this merchant (such as merchant-side staff). Visible to users with the `canViewMerchantUser` permission.
   </Card>
-  <Card title="Notifications" icon="bell">
+  <Card title="Notifications" icon="bell" href="/customers/managing-customers">
     System notifications associated with this customer record.
   </Card>
 </CardGroup>

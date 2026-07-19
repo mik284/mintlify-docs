@@ -23,49 +23,49 @@ Select **Transactions** from the left-hand navigation sidebar. The portal opens 
 The table presents one row per payment event. Scroll horizontally to reveal all columns — the table is wide by design to surface the full context of each transaction without requiring you to open the detail view.
 
 <CardGroup cols={2}>
-  <Card title="Reference Number (RRN)" icon="fingerprint">
+  <Card title="Reference Number (RRN)" icon="fingerprint" href="/transactions/transaction-details">
     The Retrieval Reference Number assigned by the payment switch. Use the RRN to match a Lango record to your switch or card-scheme statement.
   </Card>
-  <Card title="Transaction Date" icon="calendar">
-    The date and time the transaction was recorded, displayed in your local timezone in `YYYY-MM-DD, hh:mm:ss` format.
+  <Card title="Transaction Date" icon="calendar" href="/transactions/transaction-details">
+    The date and time the transaction was recorded, displayed in your local timezone in `YYYY-MM-DD, hh:mm:ss am/pm` format.
   </Card>
-  <Card title="Terminal Serial Number" icon="barcode">
+  <Card title="Terminal Serial Number" icon="barcode" href="/transactions/transaction-details">
     The physical serial number of the POS terminal that processed the payment, sourced from the device profile.
   </Card>
-  <Card title="Transaction Status" icon="circle-check">
+  <Card title="Transaction Status" icon="circle-check" href="/transactions/transaction-details">
     The outcome of the payment — `SUCCESSFUL` or `DECLINED` — as returned by the payment switch.
   </Card>
-  <Card title="Response Code" icon="code">
+  <Card title="Response Code" icon="code" href="/transactions/transaction-details">
     The numeric response code from the switch, displayed alongside its human-readable message (for example, `00 : Approved`).
   </Card>
-  <Card title="Amount" icon="coins">
+  <Card title="Amount" icon="coins" href="/transactions/transaction-details">
     The transaction amount formatted to two decimal places, prefixed with the currency symbol (for example, `TZS 15,000.00`).
   </Card>
-  <Card title="Card Number (PAN)" icon="credit-card">
+  <Card title="Card Number (PAN)" icon="credit-card" href="/transactions/transaction-details">
     The masked Primary Account Number of the card used. This field is display-only and is not searchable.
   </Card>
-  <Card title="Transaction Type" icon="arrow-right-arrow-left">
+  <Card title="Transaction Type" icon="arrow-right-arrow-left" href="/transactions/transaction-details">
     The class of payment event — such as `SALE`, `REFUND`, `CASHBACK`, `BILL PAYMENT`, `PREAUTH`, and others.
   </Card>
-  <Card title="Entry Mode" icon="keyboard">
+  <Card title="Entry Mode" icon="keyboard" href="/transactions/transaction-details">
     How the card data was captured — for example, chip, swipe, or contactless.
   </Card>
-  <Card title="Customer Name" icon="building">
+  <Card title="Customer Name" icon="building" href="/transactions/transaction-details">
     The merchant customer the terminal belongs to. Click the name to navigate directly to that customer's profile.
   </Card>
-  <Card title="Outlet Name" icon="store">
+  <Card title="Outlet Name" icon="store" href="/transactions/transaction-details">
     The specific outlet where the terminal is deployed. Click the name to navigate to the outlet record.
   </Card>
-  <Card title="Operator" icon="user">
+  <Card title="Operator" icon="user" href="/transactions/transaction-details">
     The operator who was logged in to the terminal when the transaction was processed.
   </Card>
-  <Card title="TID" icon="tag">
+  <Card title="TID" icon="tag" href="/transactions/transaction-details">
     The Terminal ID assigned in the device profile, used to identify the terminal at the switch level.
   </Card>
-  <Card title="MID" icon="hashtag">
+  <Card title="MID" icon="hashtag" href="/transactions/transaction-details">
     The Merchant ID associated with the transaction at the switch level.
   </Card>
-  <Card title="Owner" icon="flag">
+  <Card title="Owner" icon="flag" href="/transactions/transaction-details">
     Indicates whether the transaction is **On-us** (card issued by your institution) or **Off-us** (card issued by another institution).
   </Card>
 </CardGroup>
@@ -84,12 +84,13 @@ Use the search and filter bar above the table to narrow the transaction list. Yo
     Type a full or partial RRN into the **Reference Number** field. This is the fastest way to locate a single, known transaction.
   </Step>
   <Step title="Set a date range">
-    Click the **Transaction Date** date-range picker and select a **From** date and a **To** date. Lango converts your selection to full ISO timestamps when querying the database, so you retrieve every transaction that occurred within your chosen window — including those on the boundary dates.
+    Click the **Transaction Date** date-range picker and select a **From** date and a **To** date. Every transaction that occurred within your chosen window — including those on the boundary dates — will be included in the results.
   </Step>
-  <Step title="Filter by terminal, customer, outlet, or operator">
+  <Step title="Filter by terminal, customer, outlet, operator, or TID">
     Use the remaining filter fields as needed:
 
     - **Terminal Serial Number** — enter the serial number printed on the device.
+    - **TID** — enter the Terminal ID to filter by a specific switch-registered terminal identifier.
     - **Customer Name** — start typing to search and select from a live-loading customer list.
     - **Outlet Name** — start typing to search and select from a live-loading outlet list.
     - **Operator** — start typing to search and select from a live-loading operator list.

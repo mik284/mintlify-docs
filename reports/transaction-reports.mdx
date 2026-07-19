@@ -1,5 +1,5 @@
 ---
-title: "Generate Transaction Reports for Reconciliation"
+title: "Transaction Reports: Reconcile and Export Transactions"
 sidebarTitle: "Transaction Reports"
 description: "Export detailed and summary transaction reports from Lango. Filter by date, terminal, customer, or status for daily reconciliation and compliance."
 ---
@@ -10,14 +10,10 @@ Lango provides two complementary transaction report types to support daily recon
 
 In the left-hand sidebar, click **Reports** to expand the reports menu. You will find transaction report entries grouped by type:
 
-<CardGroup cols={2}>
-  <Card title="Detailed Transaction Reports" icon="list">
-    Row-level records for each transaction type. Navigate to `/reports/transactions` and select a sub-report such as **Local Purchase**, **On-Us Purchase**, **Off-Us Purchase**, **Local Cash Advance**, **International Card Purchase**, **International Cash Advance**, or **Failed Transactions**.
-  </Card>
-  <Card title="Summary Transaction Reports" icon="chart-bar">
-    Aggregated totals by transaction type. Navigate to `/reports/summary-transactions` and select a sub-report such as **Local Purchase**, **Local Cash Advance**, **International Card Purchase**, **Total Purchase and Cash Advance**, or **Local and International Card Purchase**.
-  </Card>
-</CardGroup>
+| Report type | What it contains | Where to find it |
+|---|---|---|
+| **Detailed Transaction Reports** | Row-level records for each transaction type, including **Local Purchase**, **On-Us Purchase**, **Off-Us Purchase**, **Local Cash Advance**, **International Card Purchase**, **International Cash Advance**, and **Failed Transactions**. | Reports → Transactions Reports |
+| **Summary Transaction Reports** | Aggregated totals by transaction type, including **Local Purchase**, **Local Cash Advance**, **International Card Purchase**, **Total Purchase and Cash Advance**, and **Local and International Card Purchase**. | Reports → Summary Transactions Reports |
 
 ## Choosing Between Detailed and Summary Reports
 
@@ -39,7 +35,7 @@ Use the search panel above the report table to scope your results before generat
 
 <Steps>
   <Step title="Set a date range">
-    Click the **Transaction Date** field and select a start date and end date. The date range filter is required — results will not load without it. The portal converts your selection into `fromDate` and `toDate` parameters automatically.
+    Click the **Transaction Date** field and select a start date and end date. The date range filter is required — results will not load without it.
   </Step>
   <Step title="Apply optional filters">
     Refine the results further using any combination of these fields:
@@ -99,4 +95,4 @@ The exported columns include: Transaction Date, Reference Number, Merchant Name,
 
 ## Permissions
 
-Access to transaction reports requires the `lite.reports.view` permission (`canViewReports`). Contact your system administrator if the **Reports** menu is not visible in your sidebar.
+Access to transaction reports requires the `lite.reports.view` permission. Contact your system administrator if the **Reports** menu is not visible in your sidebar.

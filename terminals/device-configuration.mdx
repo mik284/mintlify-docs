@@ -1,7 +1,7 @@
 ---
 title: "Configure Terminal Device Profiles and Parameters"
 sidebarTitle: "Device Configuration"
-description: "Device profiles define the parameter set applied to POS terminals at a given outlet. Learn how to create profiles, set parameters, and assign them to terminals."
+description: "Device profiles define the parameter set applied to POS terminals at an outlet. Learn how to create profiles, set parameters, and assign them to terminals."
 ---
 
 A **device profile** is a named configuration template attached to a specific merchant outlet. Every terminal assigned to that outlet operates under one of its device profiles — the profile defines the parameter values that control the terminal's behaviour, the operators permitted to use it, and the transaction settings it applies. By grouping configuration at the profile level rather than the individual device level, you can manage consistent settings across multiple terminals at an outlet without configuring each one separately.
@@ -62,17 +62,11 @@ Device profiles are managed within the Customer Management section of the portal
 
 Clicking on a profile name in the Profiles tab opens the profile detail page at `/customer-management/:customerId/outlets/:outletId/profile/:profileId`. On this page you can see:
 
-<CardGroup cols={3}>
-  <Card title="Parameters" icon="sliders">
-    The full list of key-value parameter pairs applied to this profile, including TID, MID, and any custom parameter keys configured for this outlet.
-  </Card>
-  <Card title="Terminals" icon="mobile">
-    The physical terminals currently assigned to this profile. Clicking a terminal navigates to its inventory detail page.
-  </Card>
-  <Card title="Operators" icon="users">
-    The operators registered under this profile who are authorised to process transactions on the associated terminals.
-  </Card>
-</CardGroup>
+| Section | What it shows |
+|---|---|
+| **Parameters** | The full list of key-value parameter pairs applied to this profile, including TID, MID, and any custom parameter keys configured for this outlet. |
+| **Terminals** | The physical terminals currently assigned to this profile. Clicking a terminal navigates to its inventory detail page. |
+| **Operators** | The operators registered under this profile who are authorised to process transactions on the associated terminals. |
 
 The profile detail page also provides quick navigation links back to the parent outlet and parent customer record.
 
@@ -99,7 +93,7 @@ To modify a device profile's parameter values:
   Changes to a device profile apply to every terminal linked to that profile. If you need to change settings for only one terminal without affecting others at the same outlet, create a separate profile for that terminal rather than editing the shared profile.
 </Tip>
 
-**Required permissions:** `canViewTerminalProfile`, `canUpdateTerminalProfile`
+**Required permissions:** `canViewTerminalProfile`, `canCreateTerminalProfile`, `canUpdateTerminalProfile`
 
 ## Deleting a Profile
 
