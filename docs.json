@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Lango Docs",
-  "theme": "almond",
+  "theme": "willow",
   "favicon": {
     "light": "/images/lango_icon.png",
     "dark": "/images/lango_icon.png"
