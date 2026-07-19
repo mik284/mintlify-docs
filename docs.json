@@ -2,7 +2,10 @@
   "$schema": "https://mintlify.com/docs.json",
   "name": "Lango Docs",
   "theme": "almond",
-  "favicon": "https://media.brand.dev/3f39bfa3-6516-456b-ad41-024aaff8d9be.svg",
+  "favicon": {
+    "light": "/images/lango_icon.png",
+    "dark": "/images/lango_icon.png"
+  },
   "colors": {
     "primary": "#198dfb",
     "light": "#f54755"
