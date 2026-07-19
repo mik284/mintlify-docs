@@ -1,0 +1,221 @@
+---
+title: "Configure Roles, Workgroups, and Access Permissions"
+sidebarTitle: "Roles & Permissions"
+description: "Lango uses a workgroup and role system to control access. Define roles with specific permissions, group them into workgroups, and assign users accordingly."
+---
+
+Access control in Lango is built on a layered model that gives you fine-grained control over what every user in your organisation can see and do. Rather than assigning permissions directly to individuals, you compose permissions into roles, bundle roles into workgroups, and then assign users to workgroups. This approach makes it easy to onboard new staff, enforce consistent access policies, and adapt quickly when responsibilities change.
+
+<Tip>
+  Model your workgroups around your team structure — for example, **Terminal
+  Operations**, **Compliance**, **Customer Onboarding**, and **Finance**. Each
+  workgroup should reflect a distinct set of job responsibilities.
+</Tip>
+
+---
+
+## Understanding the access model
+
+Lango uses a four-tier hierarchy to manage access:
+
+```
+Permissions  →  Roles  →  Workgroups  →  Users
+```
+
+| Layer           | Description                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------ |
+| **Permission**  | An atomic action, such as `lite.customer.create` or `lite.terminal.view`. Permissions are predefined by the system. |
+| **Role**        | A named collection of permissions. For example, a "Customer Onboarding Officer" role might bundle `lite.customer.create`, `lite.customer.view`, and `lite.outlet.create`. |
+| **Workgroup**   | A named collection of roles. A single user can inherit permissions from multiple roles through their workgroup. |
+| **User**        | A portal account assigned to exactly one workgroup, which determines the complete set of actions that user is allowed to perform. |
+
+This separation means you can change what an entire team can do by editing a single workgroup — no need to update every individual account.
+
+<Note>
+  Changes to a workgroup's roles take effect immediately for all users currently
+  assigned to that workgroup.
+</Note>
+
+---
+
+## Viewing roles
+
+<Steps>
+  <Step title="Navigate to Roles">
+    Go to **User Management → Roles** in the left sidebar. The **List of Roles** table appears.
+  </Step>
+  <Step title="Browse the role list">
+    The table shows each role's **Name**, **Description**, and **Date/Time Created**. Click the **View** button (eye icon) next to any role to see its full list of assigned permissions.
+  </Step>
+  <Step title="Search for a role">
+    Use the search fields above the table to filter roles by name or description.
+  </Step>
+</Steps>
+
+---
+
+## Creating a role
+
+<Steps>
+  <Step title="Open the Roles page">
+    Navigate to **User Management → Roles**.
+  </Step>
+  <Step title="Click Create Role">
+    Click the **Create Role** button in the top-right toolbar. A modal form appears.
+  </Step>
+  <Step title="Enter the role details">
+    Provide a **Role Name** and a **Role Description** that clearly reflects the job function this role supports (for example, "Terminal Technician" or "Compliance Reviewer").
+  </Step>
+  <Step title="Select permissions">
+    Use the **Permission Cascader** to browse and select individual permissions. Permissions are organised by category (customer, terminal, transaction, user, settings, and so on). Select all the actions that users in this role need to perform.
+  </Step>
+  <Step title="Save the role">
+    Click **Save**. The new role appears in the list immediately and is ready to be added to a workgroup.
+  </Step>
+</Steps>
+
+---
+
+## Creating a workgroup
+
+<Steps>
+  <Step title="Open the Workgroups page">
+    Navigate to **User Management → Workgroups**.
+  </Step>
+  <Step title="Click Add Workgroup">
+    Select **Add Workgroup** in the toolbar. A modal form appears.
+  </Step>
+  <Step title="Name the workgroup">
+    Enter a **Workgroup Name** and a **Workgroup Description**. Use alphanumeric characters only — no special characters are permitted.
+  </Step>
+  <Step title="Assign roles">
+    From the **Roles** dropdown, select one or more roles to include in this workgroup. Users assigned to this workgroup will inherit the combined permissions of all selected roles.
+  </Step>
+  <Step title="Save the workgroup">
+    Click **Save**. The workgroup is created and can now be assigned to new or existing users.
+  </Step>
+</Steps>
+
+---
+
+## Permission reference
+
+The permissions available in Lango are grouped into the following categories. Use the accordions below to find the specific permission strings you need when building roles.
+
+<Accordion title="Customer permissions">
+  These permissions control access to customer (merchant) records and their associated outlets and operators.
+
+  | Permission key                  | What it allows                                      |
+  | ------------------------------- | --------------------------------------------------- |
+  | `lite.customer.view`            | View the customer list and individual customer records |
+  | `lite.customer.create`          | Create new customer records                         |
+  | `lite.customer.update`          | Edit existing customer records                      |
+  | `lite.customer.delete`          | Delete or archive customer records                  |
+  | `lite.outlet.view`              | View outlets belonging to a customer                |
+  | `lite.outlet.create`            | Add new outlets to a customer                       |
+  | `lite.outlet.update`            | Edit outlet details                                 |
+  | `lite.outlet.delete`            | Remove outlets from a customer                      |
+  | `lite.operator.view`            | View operators assigned to a terminal or outlet     |
+  | `lite.operator.create`          | Create new operator accounts                        |
+  | `lite.operator.update`          | Edit operator details                               |
+  | `lite.operator.delete`          | Remove operators                                    |
+  | `lite.operator.activate`        | Activate or deactivate an operator account          |
+  | `lite.operator.reset`           | Reset an operator's PIN or password                 |
+</Accordion>
+
+<Accordion title="Terminal permissions">
+  These permissions govern access to the terminal inventory, terminal management, and device parameterisation functions.
+
+  | Permission key                    | What it allows                                        |
+  | --------------------------------- | ----------------------------------------------------- |
+  | `lite.terminal.view`              | View the terminal list and individual terminal details |
+  | `lite.terminal.create`            | Add new terminals to the system                       |
+  | `lite.terminal.update`            | Edit terminal details                                 |
+  | `lite.terminal.delete`            | Remove terminals from the system                      |
+  | `lite.terminal.inventory`         | Access the Inventory section                          |
+  | `lite.terminal.manage`            | Access the Terminal Management System menu            |
+  | `lite.terminalprofile.view`       | View device/terminal profiles                         |
+  | `lite.terminalprofile.create`     | Create terminal profiles                              |
+  | `lite.terminalprofile.update`     | Edit terminal profiles                                |
+  | `lite.terminalprofile.delete`     | Delete terminal profiles                              |
+  | `lite.configurations.view`        | View device parameter configurations                  |
+  | `lite.configurations.create`      | Create device parameter configurations                |
+  | `lite.configurations.update`      | Edit device parameter configurations                  |
+  | `lite.configurations.delete`      | Delete device parameter configurations                |
+  | `lite.parameter_keys.view`        | View terminal parameter keys                          |
+  | `lite.parameter_keys.create`      | Create terminal parameter keys                        |
+  | `lite.parameter_keys.update`      | Update terminal parameter keys                        |
+  | `lite.parameter_keys.delete`      | Delete terminal parameter keys                        |
+  | `lite.estate.view`                | View the estate (device selector groups)              |
+  | `lite.estate.create`              | Create estate entries                                 |
+  | `lite.estate.update`              | Edit estate entries                                   |
+  | `lite.estate.delete`              | Delete estate entries                                 |
+  | `lite.sim_cards.view`             | View SIM card records                                 |
+  | `lite.sim_cards.create`           | Register new SIM cards                                |
+  | `lite.sim_cards.update`           | Update SIM card details                               |
+  | `lite.sim_cards.delete`           | Remove SIM card records                               |
+</Accordion>
+
+<Accordion title="Transaction permissions">
+  | Permission key                              | What it allows                              |
+  | ------------------------------------------- | ------------------------------------------- |
+  | `standard.transaction.view`                 | View the Transactions list and transaction details |
+</Accordion>
+
+<Accordion title="Report permissions">
+  | Permission key          | What it allows                                       |
+  | ----------------------- | ---------------------------------------------------- |
+  | `lite.reports.view`     | Access all reports under the Reports section, including terminal, customer, and transaction reports |
+
+  Audit trail access also requires `lite.reports.view`. Dashboard-level permissions are controlled separately:
+
+  | Permission key                                    | What it allows                     |
+  | ------------------------------------------------- | ---------------------------------- |
+  | `lite.dashboard.viewTerminalDashboard`            | View the Terminals Telemetry dashboard |
+  | `standard.dashboard.viewTransactionDashboard`     | View the Transactions Dashboard    |
+  | `standard.dashboard.viewCustomerDashboard`        | View the Customer Dashboard        |
+</Accordion>
+
+<Accordion title="User and administration permissions">
+  These permissions control access to User Management, Settings, Maker-Checker configuration, and Archive functions.
+
+  | Permission key               | What it allows                                        |
+  | ---------------------------- | ----------------------------------------------------- |
+  | `lite.user.view`             | View the Users list                                   |
+  | `lite.user.create`           | Create new portal users                               |
+  | `lite.user.update`           | Edit existing user accounts                           |
+  | `lite.user.delete`           | Delete or deactivate user accounts                    |
+  | `lite.role.view`             | View the Roles list                                   |
+  | `lite.role.create`           | Create new roles                                      |
+  | `lite.role.update`           | Edit existing roles                                   |
+  | `lite.role.delete`           | Delete roles                                          |
+  | `lite.workgroup.view`        | View the Workgroups list                              |
+  | `lite.workgroup.create`      | Create new workgroups                                 |
+  | `lite.workgroup.update`      | Edit workgroup composition and assignments            |
+  | `lite.workgroup.delete`      | Delete workgroups                                     |
+  | `lite.settings.view`         | View System Settings                                  |
+  | `lite.settings.create`       | Create new settings entries                           |
+  | `lite.settings.update`       | Edit System Settings                                  |
+  | `lite.settings.delete`       | Delete settings entries                               |
+  | `lite.stateChange.view`      | View the Tasks (maker-checker inbox)                  |
+  | `lite.archive.view`          | View the Archive section                              |
+  | `lite.archive.create`        | Create archive entries                                |
+  | `lite.archive.update`        | Restore archived records                              |
+  | `lite.archive.delete`        | Permanently delete archived records                   |
+  | `lite.masterdata.view`       | Access the Master Data section                        |
+</Accordion>
+
+<Accordion title="Lango Mobile permissions">
+  These permissions apply only to organisations with the Lango Mobile add-on enabled.
+
+  | Permission key                  | What it allows                                      |
+  | ------------------------------- | --------------------------------------------------- |
+  | `enterprise.ticket.view`        | View the Support Requests list and access Lango Mobile menu |
+  | `enterprise.ticket.create`      | Raise new support tickets                           |
+  | `enterprise.ticket.update`      | Update or reassign tickets                          |
+  | `enterprise.ticket.delete`      | Delete tickets                                      |
+  | `enterprise.merchantuser.view`  | View merchant (customer) user accounts              |
+  | `enterprise.merchantuser.create`| Create merchant user accounts                       |
+  | `enterprise.merchantuser.update`| Update merchant user accounts                       |
+  | `enterprise.merchantuser.delete`| Delete merchant user accounts                       |
+</Accordion>

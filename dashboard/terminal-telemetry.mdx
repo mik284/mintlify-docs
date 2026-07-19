@@ -1,0 +1,110 @@
+---
+title: "Monitor Your Terminal Fleet with Real-time Telemetry"
+sidebarTitle: "Terminal Telemetry"
+description: "The Terminals Telemetry dashboard shows live status, network connectivity, temperature, and GPS location of every POS terminal in your estate."
+---
+
+The Terminals Telemetry view gives your operations team an immediate, live picture of every POS terminal deployed across your estate. The moment you open the view, the platform connects to a live data channel and streams telemetry directly from your devices — covering connectivity, hardware health, PIN pad status, and precise GPS location. Because data arrives through a persistent channel, you never need to manually refresh the page; the figures and map update automatically as conditions change in the field.
+
+<Note>
+  Telemetry data is delivered over a live channel (`dashboard:all_devices`). All metrics and the map update automatically whenever the platform receives a new reading from your terminals. You do not need to refresh the page.
+</Note>
+
+## Accessing Terminals Telemetry
+
+Navigate to **Dashboards** in the left sidebar. The platform lands you on the Terminals Telemetry view by default. If you are on the Transactions Dashboard, click the **Terminals Dashboard** tab to switch back.
+
+This view requires the `canViewTerminalDashboard` permission. Contact your administrator if the view is not available to you.
+
+## Fleet Status Summary
+
+The summary row at the top of the view gives you an at-a-glance count of your entire terminal estate broken down by operational state.
+
+| Metric | What it shows |
+|---|---|
+| **Total Terminals** | The total number of terminals registered in the platform. Click **View Terminals** to open the full inventory list. |
+| **Active** | Terminals currently online and processing transactions. |
+| **Inactive** | Terminals that are registered but not communicating with the platform. |
+| **Idle** | Terminals online but not currently processing transactions. |
+| **TMS Inactive** | Terminals that have lost contact with the Terminal Management System specifically. |
+
+The **Terminal Uptime** donut chart visualises the proportion of active, inactive, idle, and TMS-inactive devices in your fleet at a glance.
+
+## Network Connectivity
+
+The **Terminal By Network** chart breaks down your online terminals by the type of network connection each device is using.
+
+| Network type | Field |
+|---|---|
+| 2G | `deviceNetworkOnline2` |
+| 3G | `deviceNetworkOnline3` |
+| 4G | `deviceNetworkOnline4` |
+| 5G | `deviceNetworkOnline5` |
+| Wi-Fi | `deviceNetworkOnlineWifi` (transport type `TRANSPORT_WIFI`) |
+
+The **Offline Devices** count (`deviceOffline`) reflects terminals that have lost all network connectivity and are currently unreachable. Use this figure to prioritise field support calls.
+
+## PIN Pad Status
+
+The **Online & Offline PIN Validation** chart shows the split between PIN pads that are currently communicating (`pinOnline`) and those that are not (`pinOffline`). A high offline PIN count can indicate tamper events, hardware faults, or connectivity problems specifically affecting PIN pad modules rather than the main terminal unit.
+
+## Temperature Monitoring
+
+The **Terminal Temperature Status** bar chart groups your terminals into three thermal bands using the `deviceTempData` readings received from each device:
+
+| Band | What it means |
+|---|---|
+| **Normal** | Temperature is within the manufacturer's safe operating range. |
+| **Overheating** | Temperature has exceeded safe thresholds. Arrange a field visit promptly to prevent hardware damage or payment failures. |
+| **Other** | Temperature reading is outside expected bands or the sensor is reporting an anomalous value. |
+
+<Tip>
+  If you see a spike in overheating terminals, cross-reference the map below to identify which geographic area is affected — heat stress from environmental conditions (direct sunlight, poorly ventilated enclosures) often clusters in specific locations.
+</Tip>
+
+## Interactive Map — All Terminals Distribution
+
+The **All Terminals Distribution** map displays a live GPS cluster map of every terminal with a known location. Terminals are colour-coded by operational status:
+
+| Colour | Status |
+|---|---|
+| 🟢 Green | Active |
+| 🔴 Red | Inactive |
+| 🟡 Yellow | Idle |
+| 🔵 Blue | TMS Inactive |
+
+Each pin on the map represents a terminal and carries the following data from the live channel:
+
+- **Serial number** — the hardware serial number of the device
+- **IMEI** — the unique modem identifier
+- **Transport** — the active network transport (e.g. `FOURG`, `TRANSPORT_WIFI`)
+- **Latitude / Longitude** — the last reported GPS coordinates
+- **Status** — the current operational status of the terminal
+
+As clusters are zoomed in, individual pins become visible. Click any pin to open that terminal's detail page, where you can review its full configuration, transaction history, and operator assignments.
+
+<Tip>
+  Click a terminal pin on the map to navigate directly to that terminal's detail page without leaving the dashboard context. You can review its configuration, assigned operator, and recent transactions from there.
+</Tip>
+
+<Note>
+  If the map displays "Map functionality is not available", the platform's map provider has not been configured for your environment. Contact your system administrator to enable GPS map support.
+</Note>
+
+## Terminals Grid View
+
+In addition to the telemetry dashboard, you can switch to a searchable grid of all terminals by clicking the **Terminals Grid View** tab at the top of the page.
+
+The grid view lets you filter terminals by:
+
+- **Serial Number** — search for a specific device
+- **Customer Name** — filter by the merchant or agent the terminal is assigned to
+- **Outlet Name** — narrow results to a specific merchant outlet
+- **Bank Branch** — filter by the issuing branch
+- **Bank Region** — filter by geographic region
+- **Terminal Status** — `ACTIVE`, `IDLE`, `INACTIVE`, or `TMS_INACTIVE`
+- **Inventory Status** — `ASSIGNED`, `DECOMMISSION`, `INREPAIR`, or `INSTORE`
+
+<Note>
+  The Terminals Grid View tab is only available to users with the `canViewTerminal` permission. If the tab appears greyed out, ask your administrator to grant you the appropriate role.
+</Note>

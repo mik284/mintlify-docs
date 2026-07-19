@@ -1,0 +1,128 @@
+---
+title: "Configure Terminal Device Profiles and Parameters"
+sidebarTitle: "Device Configuration"
+description: "Device profiles define the parameter set applied to POS terminals at a given outlet. Learn how to create profiles, set parameters, and assign them to terminals."
+---
+
+A **device profile** is a named configuration template attached to a specific merchant outlet. Every terminal assigned to that outlet operates under one of its device profiles — the profile defines the parameter values that control the terminal's behaviour, the operators permitted to use it, and the transaction settings it applies. By grouping configuration at the profile level rather than the individual device level, you can manage consistent settings across multiple terminals at an outlet without configuring each one separately.
+
+Device profiles sit at the intersection of three entities in Lango:
+
+- **Outlet** — the physical or logical merchant location the profile belongs to
+- **Terminal** — one or more physical devices that inherit the profile's configuration once assigned
+- **Operators** — the staff members authorised to transact on terminals linked to the profile
+
+## Navigating to Device Profiles
+
+Device profiles are managed within the Customer Management section of the portal, scoped to a specific outlet.
+
+<Steps>
+  <Step title="Open Customer Management">
+    Click **Customer Management** in the left navigation sidebar to open the merchant list.
+  </Step>
+  <Step title="Select a customer">
+    Find and click the merchant whose outlet you want to configure. This opens the customer detail page.
+  </Step>
+  <Step title="Open an outlet">
+    On the customer detail page, select the **Outlets** tab and click the outlet you want to manage. This opens the outlet detail page at `/customer-management/:customerId/outlets/:outletId`.
+  </Step>
+  <Step title="Open the Profiles tab">
+    On the outlet detail page, click the **Profiles** tab. All existing device profiles for this outlet are listed here.
+  </Step>
+</Steps>
+
+## Creating a Device Profile
+
+<Steps>
+  <Step title="Open the outlet's Profiles tab">
+    Follow the navigation steps above to reach the **Profiles** tab for the target outlet.
+  </Step>
+  <Step title="Click Add Profile">
+    Click the **Add Profile** button. A form panel or modal opens.
+  </Step>
+  <Step title="Enter a profile name">
+    Give the profile a descriptive name that makes its purpose clear — for example, *Main Counter*, *Cashier 1*, or *Contactless Only*. Profile names must be unique within the outlet.
+  </Step>
+  <Step title="Set the Terminal ID (TID) and Merchant ID (MID)">
+    Enter the **TID** (Terminal ID) and **MID** (Merchant ID) values for this profile. These identifiers are used in transaction messages sent to the acquiring switch.
+  </Step>
+  <Step title="Add parameter values">
+    For each parameter key you want to configure, enter the corresponding value. Parameters control terminal behaviour such as transaction limits, enabled payment methods, and receipt settings.
+  </Step>
+  <Step title="Save the profile">
+    Click **Save**. The profile appears in the outlet's Profiles tab and is immediately available for terminal assignment.
+  </Step>
+</Steps>
+
+<Note>
+  The parameter keys available when creating or editing a profile are defined in **Terminal Management → Terminal Parameters → Parameters**. If a key you need is missing, contact your system administrator to have it added. See [Terminal Management](/terminals/terminal-management) for more information on managing parameter keys.
+</Note>
+
+## Viewing Profile Details
+
+Clicking on a profile name in the Profiles tab opens the profile detail page at `/customer-management/:customerId/outlets/:outletId/profile/:profileId`. On this page you can see:
+
+<CardGroup cols={3}>
+  <Card title="Parameters" icon="sliders">
+    The full list of key-value parameter pairs applied to this profile, including TID, MID, and any custom parameter keys configured for this outlet.
+  </Card>
+  <Card title="Terminals" icon="mobile">
+    The physical terminals currently assigned to this profile. Clicking a terminal navigates to its inventory detail page.
+  </Card>
+  <Card title="Operators" icon="users">
+    The operators registered under this profile who are authorised to process transactions on the associated terminals.
+  </Card>
+</CardGroup>
+
+The profile detail page also provides quick navigation links back to the parent outlet and parent customer record.
+
+## Editing a Profile
+
+To modify a device profile's parameter values:
+
+<Steps>
+  <Step title="Open the profile detail page">
+    Navigate to the outlet's **Profiles** tab and click the profile you want to edit.
+  </Step>
+  <Step title="Select Edit from the action menu">
+    Click the **Edit** or **Actions** button on the profile detail page to enter edit mode.
+  </Step>
+  <Step title="Update parameter values">
+    Modify the parameter values as needed. You can update the TID, MID, or any custom parameter key-value pairs defined for this profile.
+  </Step>
+  <Step title="Save changes">
+    Click **Save** to apply the changes. The updated parameter values take effect on all terminals currently assigned to this profile at the next terminal synchronisation.
+  </Step>
+</Steps>
+
+<Tip>
+  Changes to a device profile apply to every terminal linked to that profile. If you need to change settings for only one terminal without affecting others at the same outlet, create a separate profile for that terminal rather than editing the shared profile.
+</Tip>
+
+**Required permissions:** `canViewTerminalProfile`, `canUpdateTerminalProfile`
+
+## Deleting a Profile
+
+<Warning>
+  Before deleting a device profile, ensure that no terminals are currently assigned to it. Deleting a profile with active terminal assignments will unlink those terminals from their configuration, which can interrupt transaction processing. Reassign or decommission all terminals using the profile before proceeding with deletion.
+</Warning>
+
+To delete a device profile:
+
+<Steps>
+  <Step title="Verify no terminals are assigned">
+    Open the profile detail page and check the **Terminals** section. If any terminals are listed, reassign them to another profile first.
+  </Step>
+  <Step title="Open the action menu">
+    From the profile detail page or the Profiles tab row, open the **Actions** dropdown.
+  </Step>
+  <Step title="Select Delete">
+    Click **Delete** (or **Move to Archive**, depending on your system configuration). Confirm the action in the dialog that appears.
+  </Step>
+</Steps>
+
+**Required permissions:** `canDeleteTerminalProfile`
+
+---
+
+For managing configuration schedules and pushing parameters across terminal estates, see [Terminal Management](/terminals/terminal-management).

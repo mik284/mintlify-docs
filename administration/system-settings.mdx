@@ -1,0 +1,142 @@
+---
+title: "Configure System-wide Settings for Your Lango Instance"
+sidebarTitle: "System Settings"
+description: "System Settings in Lango let administrators configure email notifications, themes, extended forms, mobile payment options, and session parameters."
+---
+
+System Settings is the administrative control panel for your Lango deployment. It brings together every cross-cutting configuration in one place: session timeouts, OTP delivery, password policies, mobile money behaviour, portal branding, and more. Because these settings apply to all users across the entire platform, only users with the appropriate permissions should make changes here — and any modification takes effect the moment you save.
+
+<Warning>
+  Changes to System Settings apply immediately to all users and all sessions.
+  Where possible, test configuration changes in a non-production environment
+  before applying them to your live system.
+</Warning>
+
+<Note>
+  You need the `canViewSettings` permission to open this page. The `canUpdateSettings` permission is required to edit any value.
+</Note>
+
+---
+
+## Navigating to System Settings
+
+In the left sidebar, click **Settings → System Settings**. The page opens with a card divided into tabs — **Current Settings**, **Email Settings**, **Theme Settings**, and (if enabled) **Extend Forms**.
+
+---
+
+## Current Settings tab
+
+The **Current Settings** tab shows all active system parameters as a read-only summary. Click the **Edit** button in the top-right corner of the card to open the edit modal and modify values.
+
+The following parameters are available:
+
+<Accordion title="Session and token parameters">
+  | Setting                              | Description                                                                                          |
+  | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+  | **OTP Token Expiry (minutes)**       | How long a one-time password remains valid before the user must request a new one. Minimum: 3 minutes. |
+  | **System Token Expiry (minutes)**    | The lifespan of a user's access token after login. Once expired, the user must re-authenticate. Minimum: 5 minutes. |
+  | **System Idle Timeout (minutes)**    | How long the portal can remain idle before automatically logging the user out.                       |
+  | **Receive OTP Medium**               | How users receive their OTP — `Email`, `SMS`, or `Both`.                                             |
+</Accordion>
+
+<Accordion title="Password policy">
+  | Setting                                        | Description                                                                              |
+  | ---------------------------------------------- | ---------------------------------------------------------------------------------------- |
+  | **Password Expiry (Days)**                     | The number of days after which users are required to change their password.              |
+  | **Password Minimum Length**                    | The minimum number of characters required for a valid password. Default: 8.              |
+  | **Require Operator / Cashier Default PIN Change** | When enabled, operators and cashiers are prompted to change their default PIN on first login. |
+</Accordion>
+
+<Accordion title="Terminal and device parameters">
+  | Setting                                  | Description                                                                                   |
+  | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
+  | **Param Schedule Time (minutes)**        | The interval at which the server pushes parameter configurations to enrolled terminals.       |
+  | **Telemetry Statistics Interval (minutes)** | The interval at which terminals send live status and activity data back to the portal.    |
+  | **Device Activity Threshold (Hours)**    | The number of hours of inactivity before a terminal is classified as inactive.               |
+  | **User Inactivity Threshold (Days)**     | The number of days of inactivity before a portal user account is flagged as inactive.        |
+</Accordion>
+
+<Accordion title="System behaviour">
+  | Setting                    | Description                                                                                                      |
+  | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+  | **Use Maker Checker**      | Enables or disables the maker-checker workflow globally. When off, actions take effect immediately without a second approval. See [Maker-Checker](/administration/maker-checker). |
+  | **Use Permanent Delete**   | When enabled, deleted records are permanently removed from the system rather than being soft-deleted to the Archive. |
+  | **Country**                | The country in which this Lango instance operates. Used for localisation and compliance purposes.                |
+  | **Mobile Money Configuration** | Controls at which level mobile money wallets are configured. See the [Mobile Payment Configuration](#mobile-payment-configuration) section below. |
+  | **Enable Extended Forms**  | Toggles additional data collection fields across customer onboarding forms. See the [Extended Form](#extended-form-tab) section below. |
+</Accordion>
+
+---
+
+## Email Settings tab
+
+The **Email Settings** tab lets you configure the SMTP connection that Lango uses to send system notifications and OTP emails. Click the tab to open the email configuration form.
+
+<Tip>
+  If your institution uses a hosted email relay or a transactional email service,
+  enter those SMTP credentials here. After saving, trigger a test OTP to confirm
+  delivery is working before going live.
+</Tip>
+
+Configure the following fields in Email Settings:
+
+- **SMTP Host** — the outgoing mail server address
+- **SMTP Port** — typically `587` (TLS) or `465` (SSL)
+- **SMTP Username** — the authenticated sender account
+- **SMTP Password** — the password or app-specific key for the sender account
+- **Sender Name / From Address** — the display name and email address that recipients will see
+
+---
+
+## Theme Settings tab
+
+The **Theme Settings** tab allows you to customise the portal's visual appearance to match your institution's brand guidelines.
+
+<Steps>
+  <Step title="Open Theme Settings">
+    Click the **Theme Settings** tab on the System Settings page.
+  </Step>
+  <Step title="Update your branding">
+    Upload your institution's logo and configure the primary colour scheme used throughout the portal.
+  </Step>
+  <Step title="Save and review">
+    Click **Save**. Refresh the portal to see the updated theme applied across all pages.
+  </Step>
+</Steps>
+
+---
+
+## Extended Form tab
+
+The **Extended Form** tab appears only when **Enable Extended Forms** is set to `true` in Current Settings. Extended forms add supplementary data fields to customer onboarding flows, allowing your institution to capture additional information required by internal or regulatory processes.
+
+<Note>
+  The **Extend Forms** tab is only visible when `isExtendeFormEnabled` is `true`
+  in System Settings. Enable it first from the **Current Settings** tab.
+</Note>
+
+When extended forms are active, additional fields appear on the customer creation and editing screens. Use this tab to review and manage the custom field definitions available in your environment.
+
+---
+
+## Mobile payment configuration
+
+The `mobile_payment_config` setting controls the level at which mobile money wallet associations are managed for your merchants.
+
+<Tabs>
+  <Tab title="Customer level">
+    Set **Mobile Money Configuration** to `Customer` when mobile money wallets should be configured once per customer (merchant) and shared across all their outlets. Choose this option when your onboarding process registers a single wallet per merchant entity.
+  </Tab>
+  <Tab title="Outlet level">
+    Set **Mobile Money Configuration** to `Outlet` when each outlet may have its own distinct mobile money wallet. Choose this option when merchants operate branches with independent float accounts or separate transaction accounts.
+  </Tab>
+  <Tab title="Disabled">
+    Set **Mobile Money Configuration** to `None` to disable mobile money wallet management entirely for your Lango instance. Terminals will not prompt for or display mobile money configuration options.
+  </Tab>
+</Tabs>
+
+<Note>
+  Changing the Mobile Money Configuration affects how the mobile money wallet
+  fields appear during customer and outlet creation. Existing wallet associations
+  are not automatically migrated when you change this setting.
+</Note>

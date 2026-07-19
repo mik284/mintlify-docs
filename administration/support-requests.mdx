@@ -1,0 +1,150 @@
+---
+title: "Handle Merchant Support Requests via Lango Mobile"
+sidebarTitle: "Support Requests"
+description: "The Lango Mobile support module lets you view, assign, and resolve merchant support tickets raised through the Lango Mobile app directly from the portal."
+---
+
+When merchants or cashiers encounter issues — a terminal that has gone offline, a failed transaction, a configuration problem — they can raise a support ticket directly from the Lango Mobile app. Those tickets surface immediately in the **Support Requests** section of the Lango portal, where your operations or support team can view, assign, and track them through to resolution without switching tools. This page explains how to navigate the support queue and manage the full ticket lifecycle.
+
+<Note>
+  The **Lango Mobile** section and the **Support Requests** menu are only visible
+  to users whose account has the `enterprise.ticket.view` permission. If you do
+  not see this menu, your organisation may not have the Lango Mobile add-on
+  enabled, or your workgroup may not include the required permission. Contact your
+  system administrator to request access.
+</Note>
+
+---
+
+## Navigating to Support Requests
+
+In the left sidebar, click **Lango Mobile → Support Requests**. The **Support Requests** table loads, showing all tickets raised by merchants through the Lango Mobile app.
+
+---
+
+## Viewing the ticket list
+
+The ticket table provides a snapshot of every support request in the system. The following columns are displayed:
+
+| Column              | Description                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| **Customer Name**   | The merchant (customer) who raised the ticket.                                            |
+| **Outlet**          | The specific merchant outlet associated with the issue.                                   |
+| **Customer Phone**  | The contact number of the merchant who submitted the ticket.                              |
+| **Ticket Category** | The type of issue reported (e.g., Terminal Offline, Transaction Dispute). Categories are managed in **Master Data → Support Request Tickets**. |
+| **Status**          | The current state of the ticket — see [Ticket statuses](#ticket-statuses-explained) below. |
+| **Created By**      | The username of the merchant user or portal user who raised the ticket.                   |
+| **Date Created**    | The date and time the ticket was submitted.                                               |
+
+Use the search form above the table to filter tickets by customer name, outlet, phone number, ticket category, status, or date range.
+
+---
+
+## Opening a ticket
+
+Click the **View** button in the **Action** column of any ticket row to open the full ticket detail page. The detail view shows:
+
+- Complete ticket description and narrative from the merchant
+- Merchant and outlet information
+- Ticket category and current status
+- Assignment history and any remarks added during assignment or reassignment
+- Timestamps for creation and last update
+
+---
+
+## Assigning a ticket
+
+New tickets arrive with no assigned team member. Assign them promptly so the right person can begin investigation.
+
+<Steps>
+  <Step title="Open the Support Requests page">
+    Navigate to **Lango Mobile → Support Requests**.
+  </Step>
+  <Step title="Identify an unassigned ticket">
+    Unassigned tickets appear without an assignee. You can filter by status to find tickets that are **Open** and awaiting assignment.
+  </Step>
+  <Step title="Select the ticket">
+    Check the checkbox next to the ticket row you want to assign. The **Assign Ticket** button appears in the toolbar.
+  </Step>
+  <Step title="Click Assign Ticket">
+    Click **Assign Ticket** to open the assignment form.
+  </Step>
+  <Step title="Select a team member">
+    In the **Assign Ticket To** field, search for and select the portal user who will handle this ticket. The dropdown displays usernames along with their department for easy identification.
+  </Step>
+  <Step title="Add remarks">
+    Use the **Remarks** field to provide the assignee with context about the merchant's issue — for example, "Merchant reports terminal went offline after last param update" or "Customer called in — high priority."
+  </Step>
+  <Step title="Confirm the assignment">
+    Click **Submit**. The ticket status updates and the selected team member can now view it in their queue.
+  </Step>
+</Steps>
+
+<Tip>
+  Always add remarks when assigning a ticket. A brief summary of the merchant's
+  complaint gives the assignee the context they need to respond quickly without
+  having to go back to the merchant for a repeat explanation.
+</Tip>
+
+---
+
+## Reassigning a ticket
+
+If an assigned ticket needs to be handed to a different team member — because the original assignee is unavailable, or the issue requires a different skill set — you can reassign it.
+
+<Steps>
+  <Step title="Find the assigned ticket">
+    On the **Support Requests** table, locate the ticket you want to reassign. Filter by status **Assigned** if needed.
+  </Step>
+  <Step title="Select the ticket">
+    Check the checkbox next to the ticket row. The **Reassign Ticket** button appears in the toolbar.
+  </Step>
+  <Step title="Click Reassign Ticket">
+    Click **Reassign Ticket** to open the reassignment form.
+  </Step>
+  <Step title="Select a new assignee">
+    Choose the new team member from the **Reassign Ticket To** dropdown.
+  </Step>
+  <Step title="Add notes">
+    Explain in the **Remarks** field why the ticket is being reassigned and any relevant progress made so far.
+  </Step>
+  <Step title="Confirm the reassignment">
+    Click **Submit**. The ticket is now assigned to the new team member.
+  </Step>
+</Steps>
+
+---
+
+## Ticket statuses explained
+
+<CardGroup cols={2}>
+  <Card title="Open" icon="envelope-open">
+    The ticket has been received from the merchant but has not yet been assigned to anyone. Tickets in this state are awaiting triage.
+  </Card>
+  <Card title="Assigned" icon="user-check">
+    A team member has been assigned to the ticket and is expected to begin investigation.
+  </Card>
+  <Card title="In Progress" icon="arrows-spin">
+    The assignee is actively working on the issue. Updates may have been communicated to the merchant.
+  </Card>
+  <Card title="Resolved" icon="circle-check">
+    The issue has been addressed and the assignee has marked it as resolved. Tickets in this state can no longer be reassigned.
+  </Card>
+  <Card title="Closed" icon="xmark">
+    The ticket has been fully closed, either after resolution was confirmed or because it was determined to be invalid or a duplicate.
+  </Card>
+</CardGroup>
+
+---
+
+## Ticket categories
+
+Ticket categories help classify the type of issue each ticket represents — for example, **Terminal Offline**, **Transaction Dispute**, **PIN Reset**, or **App Error**. Categories appear as a filterable column in the ticket table and are used for reporting and volume analysis.
+
+<Note>
+  Ticket categories are configured in **Master Data → Support Requests Tickets**.
+  If the category your team needs does not exist, ask a user with the
+  `lite.masterdata.view` and appropriate create permissions to add it there.
+</Note>
+
+Categories are loaded dynamically in the ticket table's search filter, so your team can instantly slice the queue by issue type when triaging a high-volume support day.

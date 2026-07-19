@@ -1,0 +1,178 @@
+---
+title: "Manage Portal Users and Their Account Settings"
+sidebarTitle: "User Management"
+description: "Add, edit, deactivate, and bulk-import users in the Lango portal. Assign workgroups and roles to control what each user can see and do."
+---
+
+The **User Management** section of the Lango portal is your central hub for controlling who can access the system and what they are permitted to do. From here you can create individual users, update their details, toggle their active status, and bulk-import entire teams using a structured spreadsheet. Every user must belong to a workgroup, which ties together the roles and permissions that define their access level across the portal.
+
+<Note>
+  You need the `canViewUser` permission to see the Users list. Adding, editing,
+  or deactivating users requires `canCreateUser`, `canUpdateUser`, or
+  `canDeleteUser` respectively.
+</Note>
+
+---
+
+## Viewing the user list
+
+Navigate to **User Management → Users** in the left sidebar to open the user table. The table displays the following columns:
+
+| Column              | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| **Username**        | The unique login identifier for the user.                |
+| **Email**           | The user's registered email address.                     |
+| **User Type**       | Indicates whether the user is an admin, standard user, etc. |
+| **Phone Number**    | Contact number on record.                                |
+| **Department**      | The department the user belongs to.                      |
+| **Branch**          | The bank branch associated with the user.                |
+| **Status**          | Active (green) or Inactive (red).                        |
+| **Last Login**      | Timestamp of the user's most recent login.               |
+| **Creation Date / Time** | When the account was first created.               |
+
+Use the search bar above the table to filter users by username, email, phone number, or department. You can also select multiple rows to perform bulk actions.
+
+---
+
+## Creating a user
+
+<Note>
+  Only users with the `canCreateUser` permission see the **Add User** button.
+</Note>
+
+<Steps>
+  <Step title="Open the Users page">
+    Go to **User Management → Users** in the sidebar.
+  </Step>
+  <Step title="Click Add User">
+    Select **Add User** in the top-right toolbar to open the creation form.
+  </Step>
+  <Step title="Fill in the user's details">
+    Enter the following required information:
+    - **First Name**, **Middle Name**, **Last Name**
+    - **Username** — must be unique across the portal
+    - **Email** — used for notifications and OTP delivery
+    - **Phone Number**
+    - **Gender**
+    - **Employee ID**
+    - **User Type** (e.g., `ADMIN`, `STANDARD`)
+    - **Operation Address**
+    - **Identification Number**
+    - **Branch Code** — must match a branch that exists in **Master Data → Bank Branches**
+  </Step>
+  <Step title="Assign a workgroup">
+    Select the workgroup that matches the user's role in your organisation. Workgroups determine which menus, records, and actions the user can access. See [Roles & Permissions](/administration/roles-and-permissions) for guidance on setting up workgroups.
+  </Step>
+  <Step title="Save the user">
+    Click **Save**. The system creates the account and the user will receive credentials through the configured OTP medium.
+  </Step>
+</Steps>
+
+---
+
+## Editing a user
+
+<Steps>
+  <Step title="Locate the user">
+    On the **Users** table, find the user you want to update. Use the search fields to narrow the list if needed.
+  </Step>
+  <Step title="Open the user record">
+    Click the **View** button (eye icon) in the **Action** column to open the user's detail page.
+  </Step>
+  <Step title="Edit the details">
+    Update any of the user's fields — name, email, department, branch, workgroup, or user type.
+  </Step>
+  <Step title="Save your changes">
+    Click **Save**. Changes take effect immediately.
+  </Step>
+</Steps>
+
+---
+
+## Deactivating a user
+
+When a user leaves your organisation or should be temporarily suspended, you can deactivate their account without deleting it. Deactivated users cannot log in to the portal, and their historical data is preserved.
+
+<Steps>
+  <Step title="Open the user record">
+    Navigate to **User Management → Users** and click the **View** button next to the relevant user.
+  </Step>
+  <Step title="Toggle the status">
+    Switch the **Active** toggle to the off position. The user's status badge changes from green (Active) to red (Inactive).
+  </Step>
+  <Step title="Confirm the change">
+    Confirm the action in the dialog that appears. The user is immediately locked out of the portal.
+  </Step>
+</Steps>
+
+<Tip>
+  To reactivate a deactivated user, follow the same steps and switch the
+  **Active** toggle back on.
+</Tip>
+
+---
+
+## Bulk uploading users
+
+Use the bulk upload feature to onboard multiple users at once using a CSV or Excel spreadsheet. This is particularly useful when rolling out the portal to a new branch or team.
+
+<Warning>
+  Branch codes in your upload file must exactly match the codes configured in
+  **Master Data → Bank Branches**. Any mismatched or missing branch codes are
+  flagged before the upload proceeds, and the entire batch is blocked until all
+  codes are corrected.
+</Warning>
+
+<Steps>
+  <Step title="Open the Users page">
+    Go to **User Management → Users**.
+  </Step>
+  <Step title="Click Upload Users">
+    Select **Click to Upload Users** in the toolbar. The bulk upload dialog opens.
+  </Step>
+  <Step title="Download the sample template">
+    Click **Users Sample Excel Sheet** to download the pre-formatted template. Open it in Excel or Google Sheets.
+  </Step>
+  <Step title="Fill in the user data">
+    Complete one row per user with the following columns:
+
+    | Column                   | Example             | Notes                                      |
+    | ------------------------ | ------------------- | ------------------------------------------ |
+    | First Name               | John                | Required                                   |
+    | Middle Name              | Kyle                | Optional                                   |
+    | Last Name                | Doe                 | Required                                   |
+    | Username                 | john.doe            | Must be unique                             |
+    | Email                    | john.doe@bank.com   | Required                                   |
+    | Phone Number             | +254700123456       | Include country code                       |
+    | Gender                   | MALE                | `MALE` or `FEMALE`                         |
+    | Employee ID              | EMP001              | Your internal HR identifier                |
+    | User Type                | ADMIN               | Contact your admin for valid values        |
+    | Operation Address        | Nairobi HQ          | Office or branch location                  |
+    | Identification Number    | 12345678            | National ID or passport number             |
+    | Branch Code              | 001                 | Must match Master Data → Bank Branches     |
+    | Active                   | TRUE                | `TRUE` or `FALSE`                          |
+  </Step>
+  <Step title="Upload the file">
+    Drag and drop the completed file into the upload dialog, or click to browse and select it. The system validates all branch codes before processing.
+  </Step>
+  <Step title="Confirm the upload">
+    Review the validation result. If all branch codes are valid, click **Confirm** to create the user accounts. Any errors are highlighted so you can correct the file and re-upload.
+  </Step>
+</Steps>
+
+---
+
+## Assigning workgroups
+
+Every user must belong to at least one workgroup. The workgroup determines which permissions the user inherits and therefore which parts of the portal they can access and what actions they can perform.
+
+<CardGroup cols={2}>
+  <Card title="Assign during creation" icon="user-plus">
+    Select the appropriate workgroup when creating a new user in the **Add User** form.
+  </Card>
+  <Card title="Reassign from the user record" icon="arrows-rotate">
+    Open an existing user's record, update the **Workgroup** field, and save to change their access level immediately.
+  </Card>
+</CardGroup>
+
+To create or modify workgroups, see [Roles & Permissions](/administration/roles-and-permissions).

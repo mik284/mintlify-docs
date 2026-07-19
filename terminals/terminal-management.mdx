@@ -1,0 +1,135 @@
+---
+title: "Manage Your Terminal Estate and Device Configurations"
+sidebarTitle: "Terminal Management"
+description: "Use the Terminal Management module to organize estates, push device parameter schedules, and manage application bundles across your POS fleet."
+---
+
+The Terminal Management module gives your operations and IT teams centralised control over how POS terminals are grouped and configured across your estate. Rather than configuring each device individually, you define logical groups called **estates**, build reusable **configuration schedules**, and manage the **application libraries** and **parameter keys** that govern terminal behaviour — then push those configurations to the right group of devices at once. The module lives under the `/device-parameterization` route and is accessible from the **Terminal Management** item in the left navigation sidebar.
+
+<Note>
+  Access to this module requires the `canViewTerminalManagementMenu` permission. Individual sub-sections have their own permission requirements, detailed in each section below.
+</Note>
+
+## Estates
+
+An **estate** is a named logical grouping of terminals that you want to manage as a unit. When you create a configuration schedule, you target it at an estate — every terminal belonging to that estate receives the configuration. Estates let you segment your fleet by geography, merchant category, hardware model, or any other criteria that make sense for your operations.
+
+Navigate to **Terminal Management → Estate** (route: `/device-parameterization/estate`) to view and manage your estates.
+
+### Creating an Estate
+
+<Steps>
+  <Step title="Open the Estate page">
+    In the left sidebar, expand **Terminal Management** and click **Estate**.
+  </Step>
+  <Step title="Click Create">
+    Click the **Create New Estate** button in the top-right toolbar.
+  </Step>
+  <Step title="Enter estate details">
+    Provide a descriptive name for the estate (for example, *Nairobi Region Tier-1* or *PAX A920 Fleet*). Add any relevant description to help other administrators identify the group's purpose.
+  </Step>
+  <Step title="Add terminals">
+    Select the terminals to include in this estate. You can search by serial number or model. Terminals can belong to only one estate at a time.
+  </Step>
+  <Step title="Save the estate">
+    Click **Save**. The estate is now available as a target when you create configuration schedules.
+  </Step>
+</Steps>
+
+**Required permissions:** `canViewEstate`, `canCreateEstate`, `canUpdateEstate`, `canDeleteEstate`
+
+## Device Configurations
+
+A **device configuration** (also called a configuration schedule) is a set of parameter values packaged with a start date, end date, and a target estate. When a configuration schedule is active, Lango pushes the defined parameters to every terminal in the targeted estate according to the schedule.
+
+Navigate to **Terminal Management → Configurations** (route: `/device-parameterization/device-parameters`) to view all configuration schedules. The list shows:
+
+| Column | Description |
+|---|---|
+| **Configuration Name** | The display name you assigned when creating the schedule. |
+| **Target Estate** | The estate this configuration will be pushed to. |
+| **Is Active** | Whether the schedule is currently active (`Active`) or inactive (`Inactive`). |
+| **Start Date** | The date and time from which the configuration takes effect. |
+| **End Date** | The date and time at which the configuration expires. |
+
+### Creating a Configuration Schedule
+
+<Steps>
+  <Step title="Navigate to Configurations">
+    In the left sidebar, expand **Terminal Management** and click **Configurations**.
+  </Step>
+  <Step title="Click Create New Configurations">
+    Click the **Create New Configurations** button in the toolbar. This navigates you to `/device-parameterization/device-parameters/create-parameter`.
+  </Step>
+  <Step title="Enter a configuration name">
+    Give the configuration a clear, descriptive name that identifies its purpose or the estate it targets (for example, *Q3 Transaction Limit Update — Nairobi Region*).
+  </Step>
+  <Step title="Select the target estate">
+    Choose the estate from the **Target Estate** dropdown. Only terminals in this estate will receive the configuration when it is pushed.
+  </Step>
+  <Step title="Set the schedule dates">
+    Enter the **Start Date** and **End Date** for the schedule. The configuration will only be active within this window.
+  </Step>
+  <Step title="Add parameter values">
+    Add the key-value parameter pairs you want to push. Parameter keys must exist in the system — see [Parameter Keys](#parameter-keys) below. Each key maps to a value that overrides or sets the corresponding terminal setting.
+  </Step>
+  <Step title="Activate the configuration">
+    Toggle **Is Active** to `Active` when you are ready to push the configuration. Leave it `Inactive` to save a draft without deploying.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Lango queues the configuration for delivery to terminals in the target estate.
+  </Step>
+</Steps>
+
+<Tip>
+  Activate a configuration only after verifying it on a test terminal first. Assign one terminal to a dedicated test estate, push the configuration there, and confirm the expected behaviour before targeting your full production estate.
+</Tip>
+
+<Warning>
+  Pushing an incorrect configuration to an active estate can disrupt live terminals across all merchants in that estate. Double-check parameter values and target estate selection before setting a configuration to Active.
+</Warning>
+
+**Required permissions:** `canViewConfiguration`, `canCreateConfiguration`, `canUpdateConfiguration`, `canDeleteConfiguration`
+
+## Application Libraries
+
+An **application library** is an uploaded software package (APK, binary, or bundle) that can be deployed to terminals. Libraries are the raw application files that you later group into deployable bundles.
+
+Navigate to **Terminal Management → Terminal Parameters → Applications Libraries** (route: `/device-parameterization/master-data/upload-app`) to manage your uploaded libraries.
+
+From this page you can:
+- Upload a new application file using the upload form
+- View all previously uploaded libraries, their version information, and upload timestamps
+- Delete libraries that are no longer needed (ensure no active bundles reference the library first)
+
+**Required permissions:** `canViewAppLibrary`, `canCreateAppLibrary`, `canUpdateAppLibrary`, `canDeleteAppLibrary`
+
+## Application Bundles
+
+An **application bundle** groups one or more application libraries into a single deployable unit. When you push an update to a terminal estate, you target a bundle rather than individual files. This lets you package a full application suite — for example, the payment application plus supporting libraries — and deploy them together in a single operation.
+
+Navigate to **Terminal Management → Terminal Parameters → Applications Bundles** (route: `/device-parameterization/master-data/app-bundles`) to manage bundles.
+
+From this page you can:
+- Create a new bundle and select the libraries to include
+- View existing bundles and the libraries they contain
+- Update a bundle to add or remove libraries
+- Delete bundles that are no longer used
+
+**Required permissions:** `canViewAppBundle`, `canCreateAppBundle`, `canUpdateAppBundle`, `canDeleteAppBundle`
+
+## Parameter Keys
+
+**Parameter keys** are the master definitions for every configurable setting available on a terminal — for example, `MAX_TRANSACTION_AMOUNT`, `CASHBACK_ENABLED`, or `CONTACTLESS_LIMIT`. Keys appear as the selectable options when you add parameter values inside a configuration schedule.
+
+Navigate to **Terminal Management → Terminal Parameters → Parameters** (route: `/device-parameterization/master-data/parameters`) to view all parameter keys defined in your system.
+
+<Note>
+  Parameter keys are typically managed by your system administrator. If you need a new parameter key added — for example, to support a new terminal feature — contact your administrator. Avoid deleting keys that are actively referenced in existing configuration schedules.
+</Note>
+
+**Required permissions:** `canViewParameter`, `canCreateParameter`, `canUpdateParameter`, `canDeleteParameter`
+
+---
+
+For viewing and assigning individual terminals to outlets and estates, see [Inventory](/terminals/inventory). For configuring parameter values at the outlet level via device profiles, see [Device Configuration](/terminals/device-configuration).

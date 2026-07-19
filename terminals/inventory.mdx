@@ -1,0 +1,114 @@
+---
+title: "POS Terminal Inventory: Track and Assign Your Devices"
+sidebarTitle: "Inventory"
+description: "The Inventory module tracks every POS terminal in your estate — unassigned stock, deployed devices, serial numbers, IMEI, and SIM assignment."
+---
+
+The Inventory module is your centralised register of every physical POS terminal your bank owns or manages. Whether a device is sitting in the warehouse, deployed at a merchant outlet, or temporarily pulled for maintenance, the Inventory gives you a single place to find it, inspect its details, and manage its assignment. Every terminal in the system — regardless of its current status — appears here alongside its hardware identifiers and deployment information.
+
+## Navigating to Inventory
+
+To open the terminal inventory, select **Inventory** from the left navigation sidebar, then click **Terminals**. The portal routes you to `/inventory/terminals`, where the full terminal list loads automatically.
+
+<Note>
+  You need both the `canViewInventory` and `canViewTerminal` permissions to access the Inventory module. If either permission is missing from your role, contact your system administrator.
+</Note>
+
+## Terminal List
+
+The terminal list displays all devices registered in your estate. Each row represents a single physical terminal and shows the following columns:
+
+<CardGroup cols={2}>
+  <Card title="Serial Number" icon="barcode">
+    The unique hardware serial number printed on the device. Use this to match a physical terminal to its record in the portal.
+  </Card>
+  <Card title="IMEI" icon="signal">
+    The International Mobile Equipment Identity number for the terminal, used to uniquely identify the modem hardware.
+  </Card>
+  <Card title="Part Number" icon="tag">
+    The manufacturer part number that identifies the specific hardware variant or revision of the device.
+  </Card>
+  <Card title="Model" icon="mobile">
+    The terminal model name (for example, *PAX A920* or *Ingenico Move 5000*), derived from the device's registered model in Master Data.
+  </Card>
+  <Card title="Status" icon="circle-check">
+    The current lifecycle state of the terminal: **Unassigned** (in stock), **Deployed** (assigned to a customer or outlet), or **Decommissioned** (written off and no longer in service).
+  </Card>
+  <Card title="Customer / Outlet" icon="store">
+    The merchant customer and outlet the terminal is currently assigned to, if applicable. Unassigned terminals show no value in this column.
+  </Card>
+</CardGroup>
+
+### Terminal States
+
+A terminal moves through the following states during its lifecycle:
+
+| State | Meaning |
+|---|---|
+| **Unassigned** | The terminal is in stock and has not yet been deployed to a customer or outlet. |
+| **Deployed** | The terminal has been assigned to a customer outlet and is actively in the field. |
+| **Maintenance** | The terminal has been temporarily pulled from service for repair or inspection. |
+| **Decommissioned** | The terminal has been written off and is no longer in active use. A decommissioned terminal displays a prominent alert banner on its detail page. |
+
+## Viewing Terminal Details
+
+Clicking any terminal in the list opens its detail page at `/inventory/terminals/:id`. The detail page is organised into tabs that give you a complete picture of the device:
+
+<Tabs>
+  <Tab title="Dashboard">
+    Shows hardware details (serial number, IMEI, part number, tracking number, model image), the assigned customer and outlet, the linked device profile, last transaction time, last communication snapshot, and real-time terminal state.
+  </Tab>
+  <Tab title="Transactions">
+    Lists all transactions processed through this terminal. Requires the `canViewTransaction` permission to appear.
+  </Tab>
+  <Tab title="Operators">
+    Shows operators registered to this terminal via its device profile. Requires the `canViewOperator` permission to appear.
+  </Tab>
+  <Tab title="History">
+    Displays a full audit trail of every action taken on this terminal — assignments, updates, status changes — including the user responsible and the timestamp.
+  </Tab>
+</Tabs>
+
+## Assigning a Terminal
+
+When a new terminal arrives in your stock, it appears in the inventory with an **Unassigned** status. Use the assignment flow to link it to a customer outlet and make it operational.
+
+<Steps>
+  <Step title="Locate the terminal">
+    From the terminal list at `/inventory/terminals`, find the terminal you want to assign. Use the serial number or IMEI to identify it quickly. You can search or filter the list to narrow results.
+  </Step>
+  <Step title="Open the terminal record">
+    Click the terminal row to open its detail page, or select the terminal using the row checkbox to expose bulk action controls in the toolbar.
+  </Step>
+  <Step title="Initiate assignment">
+    In the terminal detail page or from the action dropdown in the toolbar, click **Assign**. A modal dialog opens prompting you to select the destination.
+  </Step>
+  <Step title="Select customer and outlet">
+    Choose the target customer from the dropdown, then select the specific outlet where the terminal will be deployed. Outlets are filtered to match the selected customer.
+  </Step>
+  <Step title="Select a device profile">
+    Choose the device profile that will govern this terminal's behaviour at the outlet. Device profiles define the parameter set applied to the terminal.
+  </Step>
+  <Step title="Confirm assignment">
+    Review your selections and click **Confirm**. The terminal status updates to **Deployed** and the customer and outlet columns in the inventory list reflect the assignment immediately.
+  </Step>
+</Steps>
+
+<Tip>
+  If the outlet you need does not appear in the dropdown, it may not yet be created in the system. Navigate to **Customer Management** to add the outlet first, then return to complete the assignment.
+</Tip>
+
+## Filtering Terminals
+
+The inventory list supports filtering and search to help you find specific terminals quickly. Use the search bar and filter controls above the table:
+
+- **Serial Number** — enter a full or partial serial number to find a specific device.
+- **Model** — filter by terminal model to see all devices of a given hardware type.
+- **Status** — filter by lifecycle state (Unassigned, Deployed, Decommissioned) to manage a specific subset of your estate.
+- **Customer / Outlet** — filter by assigned customer name to see all terminals deployed to a particular merchant.
+
+You can combine multiple filters at the same time. Click **Reset** to clear all active filters and return to the full list.
+
+---
+
+For device configuration management, including estates and parameter schedules, see [Terminal Management](/terminals/terminal-management).

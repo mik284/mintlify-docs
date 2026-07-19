@@ -1,0 +1,46 @@
+---
+title: "Lango Dashboard: Real-time Terminal & Transaction Monitoring"
+sidebarTitle: "Overview"
+description: "The Lango Dashboard gives you a live view of your terminal fleet and payment volumes. Access terminal telemetry and transaction KPIs from one screen."
+---
+
+The Lango Dashboard is the command centre for your payment operations. After you log in, the platform lands you here automatically — no extra navigation required. From a single screen you can monitor the health of every POS terminal in your estate and review payment performance across your entire network. The Dashboard is split into two focused views: **Terminals Telemetry** and **Transactions Dashboard**. Each view is purpose-built so your operations team can immediately act on what they see.
+
+## What the Dashboard Shows
+
+The Dashboard presents two complementary views of your payment estate:
+
+- **Terminals Telemetry** — live connectivity status, temperature readings, PIN pad health, and a GPS cluster map of every terminal in your fleet.
+- **Transactions Dashboard** — aggregate payment volumes, success and decline rates, monthly trends, and a currency-level breakdown of total transaction amounts.
+
+Both views refresh automatically in the background, so the figures you see always reflect the current state of your network.
+
+## Navigating the Dashboard
+
+The Dashboard is the default landing page after login. You can also return to it at any time by selecting **Dashboards** from the left-hand sidebar. The platform automatically redirects you to the Terminals Telemetry view first. Use the **tab switcher** at the top of the page to move between the two views.
+
+<Tip>
+  Use the tab switcher — labelled **Terminals Telemetry** and **Transactions Dashboard** — to jump between views without leaving the Dashboard. Both views remain loaded in the background, so switching is instantaneous.
+</Tip>
+
+## Dashboard Views
+
+<CardGroup cols={2}>
+  <Card title="Terminals Telemetry" icon="satellite-dish" href="/dashboard/terminal-telemetry">
+    Monitor live connectivity, temperature, PIN pad status, and GPS locations for every terminal in your fleet.
+  </Card>
+  <Card title="Transactions Dashboard" icon="chart-bar" href="/dashboard/transactions-dashboard">
+    Track real-time payment volumes, success and decline rates, and monthly transaction trends across your network.
+  </Card>
+</CardGroup>
+
+## Access Controls
+
+Your administrator controls which views are available to your account through role-based permissions. The two dashboard views are gated independently:
+
+| Permission | What it unlocks |
+|---|---|
+| `canViewTerminalDashboard` | Access to the Terminals Telemetry view and all terminal detail drill-downs |
+| `canViewSystemDashboard` | Access to the Transactions Dashboard view |
+
+If a tab is greyed out or not visible in your sidebar, your account has not been granted the corresponding permission. Contact your system administrator to request access.

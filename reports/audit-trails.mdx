@@ -1,0 +1,90 @@
+---
+title: "Audit Trails: Track All System Activity in Lango"
+sidebarTitle: "Audit Trails"
+description: "The Audit Trails report logs every create, update, and delete action performed in Lango, showing the user responsible, the timestamp, and the changed data."
+---
+
+The Audit Trails report is a tamper-evident, chronological log of every action taken inside the Lango portal — from merchant onboarding to terminal assignments to configuration changes. Each entry captures who performed the action, what they did, which record was affected, and when it happened. Compliance officers and bank operations teams use this report to satisfy regulatory audit requirements, investigate incidents, and demonstrate internal controls.
+
+<Note>
+  The Audit Trails report is read-only. No entry can be edited or deleted from the portal.
+</Note>
+
+## Navigating to Audit Trails
+
+To open the Audit Trails report, select **Reports** in the left-hand navigation menu, then click **Audit Trails**. The portal navigates to `/reports/audit-trail` and loads the full audit log paginated in reverse chronological order.
+
+## Reading the Audit Log
+
+Every row in the audit log represents a single system event. The table contains the following columns:
+
+| Column | Description |
+|---|---|
+| **User** | The portal username (`createdBy`) of the person who triggered the action. |
+| **Action** | A description of what was done — for example, `Created Terminal`, `Updated Customer`, or `Deleted Outlet`. |
+| **Entity** | The type of record affected, derived from the system context (e.g., `Terminal`, `Customer`, `Role`). |
+| **Inserted At** | The UTC timestamp, displayed in your local timezone, of when the action was recorded. |
+| **Updated At** | The timestamp of the most recent update to that audit record. |
+| **Client** | The application client used to perform the action. |
+| **IP Address** | The IP address from which the action originated. |
+| **Location** | The geographic location associated with the request. |
+| **Platform** | The device or platform used (e.g., browser, mobile). |
+| **Changes** | An inline button that opens a detailed view of what changed — see [Viewing Change History](#viewing-change-history). |
+
+## Filtering the Log
+
+The audit log supports several inline search filters to help you narrow results quickly:
+
+- **User** — Filter by the username of a specific operator.
+- **Action** — Filter by action keyword (e.g., search `delete` to see all deletion events).
+- **IP Address, Location, Platform** — Filter by connection metadata.
+- **Date Range (Inserted At / Updated At)** — Select a start and end date to restrict the log to a specific period. The date picker transforms your selection into `fromDate` and `toDate` parameters automatically.
+
+Apply multiple filters at once and click **Search** to refresh the results.
+
+## Viewing Change History
+
+The **Changes** column reveals the full detail of what each audit entry recorded. Click the eye icon on any row to open the change detail panel. Lango surfaces three distinct types of audit entries:
+
+<CardGroup cols={3}>
+  <Card title="Item Creation" icon="circle-plus">
+    Shows all field values that were set when the record was first created, so you can see the exact initial state.
+  </Card>
+  <Card title="Item Update" icon="pen-to-square">
+    Shows a before-and-after comparison of every field that changed, so you can see the previous value alongside the new value.
+  </Card>
+  <Card title="Item Deletion" icon="trash">
+    Shows the final state of the record at the moment it was deleted, giving you a recoverable snapshot of what was removed.
+  </Card>
+</CardGroup>
+
+<Tip>
+  When investigating a potential data issue, use the **Item Update** history view to confirm exactly which field was changed, by whom, and when — without needing to contact engineering.
+</Tip>
+
+## Exporting Audit Data
+
+You can export any filtered view of the audit log in CSV, Excel, or PDF format. Selecting rows before exporting limits the export to only those records; leaving all rows deselected exports the full filtered result set.
+
+<Steps>
+  <Step title="Apply filters">
+    Set a **date range** using the Inserted At or Updated At filters. Optionally filter by **User**, **IP Address**, **Location**, or **Platform** to scope the export.
+  </Step>
+  <Step title="Select rows (optional)">
+    Check individual rows to export a subset, or leave all rows unchecked to export everything matching your current filters.
+  </Step>
+  <Step title="Click Export">
+    In the top-right toolbar, click the export button for your preferred format: **Export to CSV**, **Export to Excel**, or **Export to PDF**.
+  </Step>
+  <Step title="Download the file">
+    The browser downloads the file immediately. The exported columns are: Created By, Client, IP Address, Location, Platform, Action, Entity, Inserted At, and Updated At.
+  </Step>
+</Steps>
+
+<Tip>
+  For compliance submissions, apply a precise date range and use **Export to PDF** to produce a formatted, print-ready audit report with a fixed filename of `Audit Trail Reports.pdf`.
+</Tip>
+
+## Permissions
+
+Access to the Audit Trails report requires the `lite.reports.view` permission (`canViewReports`). If the **Reports** menu item is not visible in your sidebar, contact your system administrator to request the appropriate role assignment.

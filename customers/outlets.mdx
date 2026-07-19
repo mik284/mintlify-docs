@@ -1,0 +1,176 @@
+---
+title: "Configure Merchant Outlets and Terminal Profiles"
+sidebarTitle: "Outlets"
+description: "Outlets represent a merchant's physical or logical business locations. Assign terminals, configure device profiles, and manage operators per outlet in Lango."
+---
+
+An **outlet** is a distinct business location that belongs to a customer. A single merchant may have multiple outlets — for example, a retail chain with branches in different parts of the city, or an agent with several service points. Each outlet can have its own POS terminals, terminal profiles, and operators, giving you precise control over how devices are configured and monitored at each location. You manage outlets from within the customer's profile in Lango.
+
+---
+
+## Viewing outlets for a customer
+
+<Steps>
+  <Step title="Open the customer profile">
+    Go to **Customer Management** in the sidebar, then click the customer's name in the list to open their profile.
+  </Step>
+  <Step title="Click the Outlets tab">
+    In the **Customer Details** tabbed panel, click the **Outlets** tab. The table loads with all outlets registered under this customer.
+  </Step>
+</Steps>
+
+The **List of Outlets** table displays the following columns:
+
+| Column | Description |
+|---|---|
+| **Outlet Name** | The name of the business location. Click the name to open the outlet's detail page. |
+| **Bank Branch** | The bank branch associated with this outlet. |
+| **Outlet Code** | A short identifier code assigned to the outlet. |
+| **Phone Number** | The contact phone number for this location. |
+| **Email Address** | The contact email address for this location. |
+| **Is Headquarters** | Displays a **Headquarters** tag if this outlet is designated as the merchant's main location. |
+| **Operation Address** | The physical address of the outlet. |
+| **Date / Time Creation** | The date and time the outlet record was created. |
+
+Click the **View** button (eye icon) in the **Action** column, or click the outlet name link, to open the outlet's full detail page.
+
+<Note>
+  You must have the `canViewOutlet` permission to see the Outlets tab and its contents.
+</Note>
+
+---
+
+## Creating an outlet
+
+Click **Add Outlet** in the toolbar of the List of Outlets table to register a new business location for this customer. This button appears only when no rows are selected and you have the `canCreateOutlet` permission.
+
+<Steps>
+  <Step title="Open the Add Outlet form">
+    From the customer's **Outlets** tab, click **Add Outlet** in the top-right of the table.
+  </Step>
+  <Step title="Enter the outlet details">
+    Complete the form fields:
+
+    <ParamField body="Outlet Name" type="string" required>
+      The name of the business location, e.g., "Nairobi CBD Branch" or "Westlands Agent Point".
+    </ParamField>
+
+    <ParamField body="Bank Branch" type="select" required>
+      The bank branch that manages this outlet.
+    </ParamField>
+
+    <ParamField body="Outlet Code" type="string">
+      A short reference code for the outlet used in reports and terminal assignments.
+    </ParamField>
+
+    <ParamField body="Operation Address" type="string" required>
+      The physical street address of the outlet.
+    </ParamField>
+
+    <ParamField body="Contact Person Phone" type="string">
+      The phone number for the outlet's primary contact.
+    </ParamField>
+
+    <ParamField body="Contact Person Email" type="string">
+      The email address for the outlet's primary contact.
+    </ParamField>
+
+    <ParamField body="Geographical Region" type="select">
+      The administrative or geographic region the outlet falls under, as configured in your Master Data.
+    </ParamField>
+
+    <ParamField body="Is Headquarters" type="toggle">
+      Enable this if the outlet is the merchant's head office or primary location.
+    </ParamField>
+
+    <ParamField body="Latitude / Longitude" type="string">
+      GPS coordinates for the outlet. These power the location map on the outlet's detail page.
+    </ParamField>
+  </Step>
+  <Step title="Submit and confirm">
+    Click **Submit**, then confirm the action in the confirmation prompt. The outlet list refreshes and your new outlet appears in the table.
+  </Step>
+</Steps>
+
+<Note>
+  Creating an outlet may require maker-checker approval if that feature is enabled in your system. The outlet will not appear as active until the approval is granted.
+</Note>
+
+---
+
+## Editing and deleting an outlet
+
+To edit an outlet, open the outlet's detail page, click the **Actions** dropdown, and select **Edit**. Update the relevant fields and confirm your changes.
+
+To delete an outlet, select it in the outlets table (the row checkbox), then choose **Delete** from the actions that appear in the toolbar.
+
+<Warning>
+  Deleting an outlet removes it and its associated configuration from Lango. Ensure all terminals have been reassigned or decommissioned before deleting an outlet. This action requires the `canDeleteOutlet` permission.
+</Warning>
+
+---
+
+## Terminal profiles
+
+A **terminal profile** (also called a device profile) is a configuration template that links a POS terminal to a specific outlet and defines the device's operating parameters — such as its Terminal ID (TID), Merchant ID (MID), SIM card assignment, and application settings. Every terminal assigned to an outlet must have a terminal profile.
+
+To view the terminal profiles for an outlet:
+
+<Steps>
+  <Step title="Open the outlet detail page">
+    From the customer's Outlets tab, click the outlet name or the View button to open the outlet.
+  </Step>
+  <Step title="Click the Terminal Profiles tab">
+    In the outlet's tabbed panel, click **Terminal Profiles**. The table lists all profiles associated with this outlet.
+  </Step>
+</Steps>
+
+The **List of Terminal Profiles** table shows:
+
+| Column | Description |
+|---|---|
+| **Name** | The profile name. Click to open the profile detail page (only available when a terminal is assigned). |
+| **TID** | The Terminal ID assigned to this profile. |
+| **Merchant ID** | The MID associated with this terminal (visible for non-ABSA configurations). |
+| **SIM IMSI** | The IMSI number of the SIM card assigned to this terminal. |
+| **Terminal Serial Number** | The serial number of the physical terminal. Displays **unassigned** (in red) if no terminal has been linked yet. |
+| **Date Creation** | When the terminal profile was created. |
+
+To create a new terminal profile, click **Create Terminal Profile** in the toolbar. You need the `canCreateTerminalProfile` permission to see this button.
+
+<Tip>
+  For full details on configuring terminal profiles — including parameter sets, application bundles, and key management — see the Terminal Configuration guide.
+</Tip>
+
+---
+
+## Viewing outlet transactions
+
+You can see all payments processed at a specific outlet from within the outlet's detail page.
+
+<Steps>
+  <Step title="Open the outlet detail page">
+    From the customer's Outlets tab, click the outlet name to open it.
+  </Step>
+  <Step title="Click the Transactions tab">
+    In the outlet's tabbed panel, click **Transactions**. The table loads all transactions processed through terminals at this outlet, with standard filters for date range, amount, and status.
+  </Step>
+</Steps>
+
+<Tip>
+  Use the outlet-level Transactions tab to isolate activity at a single location. This is especially useful for investigating disputes or reconciling daily settlement totals for a specific branch or agent point.
+</Tip>
+
+---
+
+## Viewing outlet location on the map
+
+The **Outlet Location Details** tab on the outlet detail page displays a map pin at the outlet's GPS coordinates (latitude and longitude). This is useful for field verifications and audit purposes. The map view is available when Google Maps integration is configured for your Lango environment.
+
+---
+
+## Managing operators at an outlet
+
+Operators are the individuals authorised to use POS terminals at an outlet. You manage operators through the terminal profile assigned to the terminal at that outlet.
+
+For step-by-step instructions on adding, activating, and resetting operators, see [Managing Operators](/customers/operators).

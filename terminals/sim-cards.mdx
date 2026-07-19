@@ -1,0 +1,132 @@
+---
+title: "Manage SIM Cards for POS Terminal Connectivity"
+sidebarTitle: "SIM Cards"
+description: "Track and assign SIM cards to POS terminals in Lango. Manage SIM provider details, ICCID, and network type for every SIM in your terminal estate."
+---
+
+SIM cards provide the cellular connectivity that allows POS terminals to communicate with your acquiring infrastructure over 2G, 3G, or 4G networks. The SIM Card Management module gives you a complete register of every SIM in your estate — whether it is sitting in unassigned stock, installed in a deployed terminal, or blocked from use. You can add new SIMs, assign them to specific terminals via their device profile, update provider details, and track which outlet and customer each SIM is currently serving.
+
+Navigate to **Inventory → SIM Card Management** in the left sidebar to access the module (route: `/inventory/sim-cards`).
+
+<Note>
+  Access to SIM Card Management requires the `canViewSimcard` permission. Additional actions — creating, updating, and deleting SIM records — require `canCreateSimcard`, `canUpdateSimcard`, and `canDeleteSimcard` respectively.
+</Note>
+
+## Viewing the SIM Card List
+
+The SIM card list loads automatically when you open the SIM Card Management page. Each row represents a single SIM and displays the following information:
+
+| Column | Description |
+|---|---|
+| **SIM Card IMSI** | The International Mobile Subscriber Identity — the primary unique identifier for the SIM card (up to 20 digits, numeric only). |
+| **Phone Number** | The mobile number associated with the SIM, if registered. |
+| **SIM Provider** | The network provider or MVNO that issued the SIM (for example, Safaricom, Airtel, or MTN). |
+| **Customer Name** | The merchant customer whose device profile the SIM is currently linked to. |
+| **Outlet Name** | The merchant outlet where the SIM's assigned terminal is deployed. |
+| **Terminal Profile Name** | The device profile the SIM is associated with via its assigned terminal. |
+| **Status** | The current state of the SIM: `assigned` (installed in a terminal), `instore` (in stock), or `blocked` (suspended from use). |
+| **Created By** | The portal user who registered the SIM record. |
+
+You can search the list by **SIM Card IMSI** or filter by **SIM Provider** or **Status** using the filter controls above the table. You can also export the full list to a CSV file using the **Export** button in the toolbar.
+
+## Adding a SIM Card
+
+You can add SIM cards one at a time using the inline form, or upload multiple SIM records in bulk using a CSV file.
+
+### Adding a Single SIM Card
+
+<Steps>
+  <Step title="Click Add New SIM Card">
+    On the SIM Card Management page, click the **Add New Sim Card** button in the top-right toolbar. A modal form opens.
+  </Step>
+  <Step title="Enter the IMSI">
+    Type the SIM card's IMSI number in the **IMSI** field. The IMSI must be numeric, must not exceed 20 characters, and must be unique in the system.
+  </Step>
+  <Step title="Select the SIM provider">
+    Choose the network provider from the **Sim Provider** dropdown. The available providers are populated from Master Data. If the provider you need is not listed, see [SIM Providers](#sim-providers) below.
+  </Step>
+  <Step title="Enter the phone number (optional)">
+    If the SIM has an associated phone number, enter it in the **Phone Number** field using the international format (for example, `+254789456120`). This field is optional.
+  </Step>
+  <Step title="Submit for approval">
+    Click **Submit**. A confirmation dialog asks you to confirm submission. Click **Yes** to create the SIM record. The new SIM appears in the list with a status of `instore`.
+  </Step>
+</Steps>
+
+### Bulk Upload
+
+To register multiple SIM cards at once, use the **Click to Upload Sim Cards** bulk upload option in the toolbar. Prepare a spreadsheet with the following columns:
+
+<ParamField body="IMSI" type="string" required>
+  The SIM card's IMSI number (numeric, max 20 characters).
+</ParamField>
+
+<ParamField body="Phone Number" type="string">
+  The SIM's associated phone number in international format (optional).
+</ParamField>
+
+<ParamField body="Sim Provider" type="string" required>
+  The exact name of the SIM provider as it appears in Master Data (for example, `Safaricom`).
+</ParamField>
+
+Upload the spreadsheet and confirm. Lango validates each row against the provider list and reports any mismatches before saving.
+
+## Assigning a SIM to a Terminal
+
+SIM cards are linked to terminals through device profiles. When a SIM is assigned to a device profile, it is associated with all terminals using that profile.
+
+<Steps>
+  <Step title="Find the SIM card">
+    In the SIM card list, locate the SIM you want to assign. You can search by IMSI to find it quickly.
+  </Step>
+  <Step title="Open the Edit form">
+    Click the **Edit** button (pencil icon) in the SIM card's row. The Update SIM Card modal opens.
+  </Step>
+  <Step title="Review the current details">
+    The form pre-populates with the SIM's current IMSI, provider, and phone number.
+  </Step>
+  <Step title="Update and save">
+    Make any necessary changes to the IMSI, provider, or phone number, then click **Submit** and confirm. Once saved, the SIM can be physically installed in a terminal and linked through the terminal's device profile assignment.
+  </Step>
+</Steps>
+
+<Tip>
+  The SIM card's **Customer Name**, **Outlet Name**, and **Terminal Profile Name** columns in the list update automatically once the device profile the SIM belongs to is assigned to a terminal at an outlet — you do not set these fields directly on the SIM record.
+</Tip>
+
+## Updating SIM Details
+
+To change a SIM card's provider, phone number, or IMSI:
+
+<Steps>
+  <Step title="Locate the SIM record">
+    Find the SIM in the list, searching by IMSI if needed.
+  </Step>
+  <Step title="Click Edit">
+    Click the **Edit** button in the row. The Update SIM Card modal opens with the current values pre-filled.
+  </Step>
+  <Step title="Modify the fields">
+    Update the **IMSI**, **Sim Provider**, or **Phone Number** as required.
+  </Step>
+  <Step title="Confirm and save">
+    Click **Submit**, confirm the action in the dialog, and the record is updated immediately.
+  </Step>
+</Steps>
+
+**Required permission:** `canUpdateSimcard`
+
+## Archiving a SIM Card
+
+To remove a SIM card from active use, click the **Archive** button (the archive icon) in the SIM card's row. Confirm the action when prompted. Archived SIMs are moved to the Archive module and no longer appear in the active SIM list. Archiving is reversible — your administrator can restore records from the Archive if needed.
+
+**Required permission:** `canDeleteSimcard`
+
+## SIM Providers
+
+The SIM provider options available when adding or editing a SIM card are maintained in **Master Data → Sim Providers** (route: `/master-data/sim-provider`). Only system administrators with `canViewSimProvider` and `canCreateSimProvider` permissions can add new providers to this list.
+
+If you need to add a new carrier or MVNO — for example, when onboarding terminals on a new network — ask your system administrator to create the provider entry in Master Data before you register the SIM cards.
+
+<Tip>
+  Use the **SIM Provider** and **Status** filters in the SIM card list to audit your estate by network. For example, filtering by `Status: assigned` and a specific provider gives you a count of all deployed SIMs on that network — useful for reconciling with your carrier's billing reports. To see live network signal quality and connectivity status for deployed terminals, visit the [Terminal Telemetry dashboard](/dashboard/terminal-telemetry).
+</Tip>

@@ -1,18 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Pro Ant",
+  "projectType": "saas",
+  "projectName": "Lango Payment Platform",
+  "projectDescription": "Lango is a web-based payment management platform that enables banks and financial institutions to manage POS terminals, merchants, transactions, users, and reporting from a single portal.",
   "theme": "almond",
-  "favicon": "https://media.brand.dev/3f39bfa3-6516-456b-ad41-024aaff8d9be.svg",
-  "colors": {
-    "primary": "#198dfb",
-    "light": "#f54755"
-  },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/mik284/lango_portal"
-    }
-  },
+  "primaryColor": "#198dfb",
+  "lightColor": "#f54755",
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -80,5 +73,30 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Real-time terminal telemetry dashboard with map and fleet status",
+    "Transaction monitoring with filtering, search, and export",
+    "Customer (merchant) management with outlets and operators",
+    "POS terminal inventory management and device parameterization",
+    "Role-based access control with fine-grained permissions",
+    "Maker-checker approval workflow for sensitive operations",
+    "Audit trail and compliance reporting",
+    "Support request ticketing via Lango Mobile",
+    "Multi-currency support",
+    "Bulk user upload and management"
+  ],
+  "publicApiSurface": [
+    "GraphQL mutation: login(userLogin: UserLoginInputs)",
+    "GraphQL mutation: verifyOtp(otp: String)",
+    "GraphQL query: getUserInfo",
+    "GraphQL query: getAllCustomers",
+    "GraphQL query: getAllTickets",
+    "GraphQL query: getAllUsers",
+    "GraphQL query: getAllSettings",
+    "GraphQL query: getAllRoles",
+    "GraphQL query: getAllAuditTrails",
+    "GraphQL query: getAllSchedules (device configurations)",
+    "GraphQL mutation: assignTicket"
+  ]
 }

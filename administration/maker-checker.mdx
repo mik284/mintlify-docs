@@ -1,0 +1,185 @@
+---
+title: "Maker-Checker: Enforce Dual Approval on Sensitive Actions"
+sidebarTitle: "Maker-Checker"
+description: "The maker-checker workflow in Lango requires a second authorized user to approve sensitive create, update, or delete actions before they take effect."
+---
+
+The maker-checker control is a four-eyes principle built into the Lango portal. When enabled, any user who initiates a sensitive action — creating a customer, updating a terminal profile, or deleting a record — becomes the **maker**. The change does not take effect immediately. Instead, it is held in a pending queue until a second authorised user, the **checker**, reviews it and either approves, declines, or returns it for correction. This workflow is a standard requirement for financial institutions that must demonstrate segregation of duties for audit and compliance purposes.
+
+<Note>
+  Maker-checker must be enabled in **Settings → System Settings** under the **Use Maker Checker** toggle before the Tasks menu and approval queue become active. See [System Settings](/administration/system-settings).
+</Note>
+
+---
+
+## How maker-checker works
+
+The workflow follows a straightforward sequence:
+
+<Steps>
+  <Step title="Maker initiates the action">
+    A user (the maker) performs a create, update, or delete operation on a configured resource — for example, adding a new customer or modifying a terminal's parameter profile.
+  </Step>
+  <Step title="Action is held in pending state">
+    Instead of taking effect immediately, the change is recorded as a **state change request** with a status of `PENDING`. The operation is not applied to the live system yet.
+  </Step>
+  <Step title="Checker receives the task">
+    The designated checker sees the new task appear in their **Tasks** inbox. If email notifications are configured, they also receive an alert.
+  </Step>
+  <Step title="Checker reviews and decides">
+    The checker opens the task, reviews the proposed change in full detail, and then selects one of three outcomes: **Approve**, **Decline**, or **Amend**.
+  </Step>
+  <Step title="Action is resolved">
+    - **Approved** — the change is applied to the live system immediately.
+    - **Declined** — the change is rejected and does not take effect. The maker is notified with the reason.
+    - **Amended** — the task is returned to the maker with notes for correction. The maker can revise and resubmit.
+  </Step>
+</Steps>
+
+---
+
+## Configuring maker-checker
+
+The **Maker Checker Configuration** page lets you define which specific operation on which resource requires a maker-checker pair, and who the designated maker, checker, and substitute checker are.
+
+<Steps>
+  <Step title="Navigate to the configuration page">
+    Go to **Settings → Maker Checker Configuration** in the left sidebar. The table lists all existing maker-checker rules.
+  </Step>
+  <Step title="Create a new configuration">
+    Click **Create Maker Checker Configuration**. A guided form with four sequential steps appears.
+  </Step>
+  <Step title="Select the schema">
+    Choose the **Schema** — this identifies the resource or module (for example, a customer, terminal, or outlet schema) that requires dual approval.
+  </Step>
+  <Step title="Select the maker">
+    Choose the portal user who will act as the **Maker** for this schema. This is the user whose actions on this resource will be queued for approval.
+  </Step>
+  <Step title="Select the checker">
+    Choose the portal user who will act as the **Checker**. The checker must be a different user from the maker — the system prevents the same user from being assigned to both roles in a single configuration.
+  </Step>
+  <Step title="Select the substitute checker">
+    Optionally, assign a **Substitute Checker** who can approve tasks when the primary checker is unavailable. The substitute must be different from both the maker and the primary checker.
+  </Step>
+  <Step title="Save the configuration">
+    Click **Save**. The new rule takes effect immediately for any subsequent actions performed by the designated maker on the selected schema.
+  </Step>
+</Steps>
+
+<Tip>
+  You can edit an existing maker-checker configuration at any time by selecting
+  the row in the table and clicking **Edit Maker Checker Configuration**. Use
+  this when team members change roles or leave the organisation.
+</Tip>
+
+---
+
+## The Tasks inbox
+
+The **Tasks** page is the maker-checker approval queue. It shows every pending, approved, declined, or amended state change request that is relevant to you.
+
+Navigate to **Tasks** in the left sidebar. The table shows:
+
+| Column                | Description                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| **Ticket Number**     | A unique reference number for the state change request.                                           |
+| **Status**            | The current state of the task — see [Task statuses](#task-statuses) below.                        |
+| **Task Name**         | A short label describing the type of action (e.g., Create Customer, Update Terminal).            |
+| **Description**       | A full narrative of the change that was requested.                                                |
+| **Created By**        | The username of the maker who initiated the action.                                               |
+| **Creation Date / Time** | When the request was submitted.                                                                |
+| **Reason**            | For non-pending tasks, the reason or message provided by the checker.                            |
+
+<Note>
+  The **Tasks** menu is only visible to users who have the `lite.stateChange.view`
+  permission **and** whose account has maker-checker enabled (`isMakerChecker = true`).
+</Note>
+
+---
+
+## Task statuses
+
+<CardGroup cols={2}>
+  <Card title="PENDING" icon="clock">
+    The task has been submitted by the maker and is awaiting review by the checker. The underlying change has **not** yet been applied to the system.
+  </Card>
+  <Card title="APPROVED" icon="circle-check">
+    The checker approved the task. The change has been applied to the live system.
+  </Card>
+  <Card title="DECLINED" icon="circle-xmark">
+    The checker rejected the task. The change was not applied. A reason is recorded against the task.
+  </Card>
+  <Card title="AMMEND" icon="pen-to-square">
+    The checker returned the task to the maker for correction. The maker must revise their submission and resubmit.
+  </Card>
+</CardGroup>
+
+---
+
+## Approving a task
+
+<Steps>
+  <Step title="Open the Tasks page">
+    Click **Tasks** in the left sidebar.
+  </Step>
+  <Step title="Find the pending task">
+    Look for tasks with a **PENDING** status. Use the status filter to narrow the list.
+  </Step>
+  <Step title="Open the task">
+    Click the **View** button (eye icon) in the **Action** column to open the task detail page.
+  </Step>
+  <Step title="Review the proposed change">
+    Carefully review the full description of the action the maker is requesting. Confirm the details are accurate and comply with your institution's policies.
+  </Step>
+  <Step title="Approve the task">
+    Click **Approve**. The system immediately applies the change and updates the task status to `APPROVED`.
+  </Step>
+</Steps>
+
+---
+
+## Declining or amending a task
+
+<Steps>
+  <Step title="Open the task">
+    Navigate to **Tasks**, find the pending item, and click **View**.
+  </Step>
+  <Step title="Choose your action">
+    - To reject the change outright, click **Decline** and enter a reason. The task status changes to `DECLINED` and the change is not applied.
+    - To send it back to the maker for correction, click **Amend** and add notes explaining what needs to be fixed. The task status changes to `AMMEND` and the maker can revise their submission.
+  </Step>
+</Steps>
+
+<Warning>
+  Tasks left in `PENDING` status do not take effect — the underlying action is
+  blocked until a checker resolves it. Ensure your team regularly reviews the
+  Tasks inbox to avoid operational delays.
+</Warning>
+
+---
+
+## Checking the status of your submitted actions
+
+As a maker, you can monitor the progress of your own submissions through the same **Tasks** page.
+
+<Steps>
+  <Step title="Go to Tasks">
+    Click **Tasks** in the sidebar.
+  </Step>
+  <Step title="Filter by your username">
+    Use the **Created By** field in the search form and enter your own username to see only your submitted actions.
+  </Step>
+  <Step title="Review statuses">
+    Any submission still awaiting review shows as `PENDING`. Approved actions show `APPROVED`, rejected actions show `DECLINED`, and items returned for correction show `AMMEND`.
+  </Step>
+  <Step title="Resubmit amended tasks">
+    If a task was returned with `AMMEND` status, review the checker's notes, make the necessary corrections to the original record, and save. This creates a new state change request for the checker to review.
+  </Step>
+</Steps>
+
+<Tip>
+  Configure email notifications in **Settings → System Settings → Email Settings**
+  so that checkers receive an email alert the moment a new task is queued for
+  their review. This reduces the time sensitive changes spend waiting in the
+  PENDING state.
+</Tip>

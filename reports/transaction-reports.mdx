@@ -1,0 +1,102 @@
+---
+title: "Generate Transaction Reports for Reconciliation"
+sidebarTitle: "Transaction Reports"
+description: "Export detailed and summary transaction reports from Lango. Filter by date, terminal, customer, or status for daily reconciliation and compliance."
+---
+
+Lango provides two complementary transaction report types to support daily reconciliation, exception handling, and regulatory reporting. The **detailed transaction reports** give you a full row-by-row record of every transaction processed through your POS estate, organized by transaction type. The **summary transaction reports** aggregate those same transactions into totals — count and amount — so you can quickly validate settlement figures without scanning thousands of individual rows. Both report types are accessible under the **Reports** section and support flexible filtering and multi-format export.
+
+## Navigating to Transaction Reports
+
+In the left-hand sidebar, click **Reports** to expand the reports menu. You will find transaction report entries grouped by type:
+
+<CardGroup cols={2}>
+  <Card title="Detailed Transaction Reports" icon="list">
+    Row-level records for each transaction type. Navigate to `/reports/transactions` and select a sub-report such as **Local Purchase**, **On-Us Purchase**, **Off-Us Purchase**, **Local Cash Advance**, **International Card Purchase**, **International Cash Advance**, or **Failed Transactions**.
+  </Card>
+  <Card title="Summary Transaction Reports" icon="chart-bar">
+    Aggregated totals by transaction type. Navigate to `/reports/summary-transactions` and select a sub-report such as **Local Purchase**, **Local Cash Advance**, **International Card Purchase**, **Total Purchase and Cash Advance**, or **Local and International Card Purchase**.
+  </Card>
+</CardGroup>
+
+## Choosing Between Detailed and Summary Reports
+
+<Tip>
+  Run the **summary report** first to confirm total transaction counts and amounts match your settlement file. Once totals reconcile, use the **detailed report** to export individual transaction records for your ledger or audit package.
+</Tip>
+
+The summary reports display three columns — **S/No.**, **No. of Transactions**, and **Amount** — for the date range you specify. They load quickly even for long date ranges because the server aggregates the data before returning it.
+
+The detailed reports display a full row per transaction and include the columns described in [Reading the Detailed Report](#reading-the-detailed-report). For large date ranges, load time increases proportionally with transaction volume.
+
+<Note>
+  Large date ranges may take a moment to load. Start with a **7-day window** for the best performance, then widen the range once you have confirmed the filters are correct.
+</Note>
+
+## Applying Filters
+
+Use the search panel above the report table to scope your results before generating or exporting.
+
+<Steps>
+  <Step title="Set a date range">
+    Click the **Transaction Date** field and select a start date and end date. The date range filter is required — results will not load without it. The portal converts your selection into `fromDate` and `toDate` parameters automatically.
+  </Step>
+  <Step title="Apply optional filters">
+    Refine the results further using any combination of these fields:
+    - **Reference Number (RRN)** — Look up a specific transaction by its retrieval reference number.
+    - **Terminal Serial Number** — Filter to a single POS device.
+  </Step>
+  <Step title="Search">
+    Click the **Search** button (or press Enter) to load results matching your criteria. The table refreshes and displays the matching transactions.
+  </Step>
+</Steps>
+
+## Reading the Detailed Report
+
+Each row in the detailed transaction table represents one transaction. The following columns are available:
+
+| Column | Description |
+|---|---|
+| **Reference Number (RRN)** | The retrieval reference number uniquely identifying this transaction. |
+| **Transaction Date** | The UTC timestamp of the transaction, shown in your local timezone. |
+| **Merchant Name** | The name of the customer (merchant) whose outlet processed the transaction. |
+| **Terminal No.** | The serial number of the POS terminal that processed the transaction. |
+| **Amount** | The transaction amount displayed with the currency symbol and two decimal places. |
+| **Card Number (PAN)** | The masked card number used in the transaction. |
+| **Merchant ID (MID)** | The merchant identifier assigned to the device profile. |
+| **TID** | The terminal identifier assigned to the device profile. |
+| **Branch** | The bank branch linked to the merchant. |
+| **Bank Region** | The bank region associated with the merchant's branch. |
+| **Country Region** | The geographic zone associated with the merchant's branch. |
+
+## Transaction Types
+
+Lango organizes detailed transaction reports by the following sub-types, each accessible from the Reports sidebar:
+
+| Report | Description |
+|---|---|
+| **Local Purchase** | On-us card purchase transactions processed domestically. |
+| **On-Us Purchase** | Purchase transactions where the issuer and acquirer are the same bank. |
+| **Off-Us Purchase** | Purchase transactions where the issuer and acquirer are different banks. |
+| **On-Us Cash Advance** | Cash advance transactions within the same bank. |
+| **Off-Us Cash Advance** | Cash advance transactions across different banks. |
+| **Local Cash Advance** | Domestic cash advance transactions. |
+| **International Card Purchase** | Purchase transactions made with internationally issued cards. |
+| **International Cash Advance** | Cash advances made with internationally issued cards. |
+| **Failed Transactions** | All transactions that did not complete successfully, regardless of type. |
+
+## Exporting Transaction Data
+
+You can export the current filtered view of any transaction report in CSV, Excel, or PDF format. To limit the export to specific rows, check those rows in the table before clicking export; otherwise, the full filtered result set is exported.
+
+Click the export button in the top-right toolbar and choose:
+
+- **Export to CSV** — Comma-separated values, suitable for loading into reconciliation tools or spreadsheets.
+- **Export to Excel** — `.xlsx` format with column headers, suitable for direct review in Microsoft Excel.
+- **Export to PDF** — A formatted PDF document, suitable for attaching to compliance reports.
+
+The exported columns include: Transaction Date, Reference Number, Merchant Name, Terminal No., Amount, Card Number, Merchant ID, TID, Branch, Bank Region, and Country Region.
+
+## Permissions
+
+Access to transaction reports requires the `lite.reports.view` permission (`canViewReports`). Contact your system administrator if the **Reports** menu is not visible in your sidebar.

@@ -1,0 +1,63 @@
+---
+title: "Transaction Dashboard: Track Payment Volumes at a Glance"
+sidebarTitle: "Transactions Dashboard"
+description: "The Transactions Dashboard displays real-time payment volumes, success rates, and transaction trends across your entire terminal network."
+---
+
+The Transactions Dashboard gives you a consolidated, real-time view of payment activity across your entire terminal network. From a single screen you can see how many transactions have been processed, how many succeeded or were declined, how much value has moved by currency, and how volumes have trended month by month. Whether you are reviewing daily performance, responding to a spike in failures, or preparing an operational report, this view puts the key figures immediately at hand.
+
+## Accessing the Transactions Dashboard
+
+<Steps>
+  <Step title="Open Dashboards">
+    Select **Dashboards** from the left-hand sidebar. The platform loads the Terminals Telemetry view by default.
+  </Step>
+  <Step title="Switch to Transactions Dashboard">
+    Click the **Transactions Dashboard** item in the left sidebar (or select the relevant tab if you are already on the Dashboard page) to switch to the transactions view.
+  </Step>
+</Steps>
+
+<Note>
+  This view requires the `canViewSystemDashboard` permission. If the Transactions Dashboard option is not visible or is greyed out in your sidebar, contact your system administrator to request access.
+</Note>
+
+## Key Metrics
+
+The summary cards at the top of the view surface the most important transaction counts at a glance.
+
+| Metric | What it shows |
+|---|---|
+| **Total Transactions** | The total number of transactions processed across your network (`getDashboardDetails.totalTransactions`). |
+| **Successful Transactions** | The count of transactions that completed with a `successful` status. |
+| **Declined Transactions** | The count of transactions returned with a `declined` status. |
+| **Failed Transactions** | The count of transactions that did not complete due to a system or network error. |
+| **Total Customers** | The total number of merchants and agents registered on the platform (`getDashboardDetails.totalCustomers`). |
+
+Each metric card includes a shortcut button to navigate directly to a pre-filtered list of those transactions.
+
+## Transaction Amount by Currency
+
+The **Total Transactions Amount By Currency** card shows the aggregate value of all transactions grouped by currency. If your network processes payments in multiple currencies, use the tabs within the card to switch between them. Each tab displays the total amount for that currency alongside the currency code.
+
+## Transactions Status Over Time
+
+The **Transactions Status Over Time** column chart plots transaction volumes month by month, with bars colour-coded by status:
+
+- 🟢 **Successful** transactions are shown in green.
+- 🔴 **Non-successful** transactions (declined or otherwise) are shown in red.
+
+The chart automatically sorts months in calendar order (January through December) so you can identify seasonal patterns or emerging trends at a glance.
+
+## Device Status Reports
+
+The **Device Status Reports** chart at the bottom of the view plots your terminal inventory by assignment status — showing counts for terminals that are `instore`, `assigned`, `under repair`, `released`, and any other registered states. Use this alongside the transaction volume data to understand how your active terminal base relates to payment throughput.
+
+## Drilling Down from a Metric
+
+Clicking the action button on any transaction metric card — such as **View Transactions** or **View Failed Transactions** — navigates you to a pre-filtered transaction list. From there you can search, sort, and export the records you need.
+
+<Tip>
+  Pair the Transactions Dashboard with the Terminals Telemetry map for a complete picture of your estate. If transaction volumes are low in a region, switch to the terminal map to check whether terminals in that area are offline or overheating — giving you an immediate link between payment performance and hardware health.
+</Tip>
+
+For a detailed walkthrough of transaction search, filtering by date range, and exporting records, see [Viewing Transactions](/transactions/viewing-transactions).

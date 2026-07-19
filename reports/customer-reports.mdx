@@ -1,0 +1,104 @@
+---
+title: "Customer Reports: Analyze Merchant Activity and Growth"
+sidebarTitle: "Customer Reports"
+description: "The Customer Reports section in Lango provides merchant onboarding summaries and activity data, exportable for portfolio analysis and compliance."
+---
+
+The Customer Reports section in Lango gives bank operations and compliance teams a consolidated view of merchant portfolio activity. The **Customer Activity** report lists merchants onboarded within a chosen date range alongside their branch, terminals, and merchant IDs — giving you everything you need for portfolio reviews and regulatory submissions. Alongside it, the **Users Created** report tracks which portal user accounts were provisioned in a given period, serving as a key input for periodic access reviews and segregation-of-duties audits. Both reports support row selection and multi-format export.
+
+<Note>
+  Access to customer reports requires the `lite.reports.view` permission (`canViewReports`). If the Reports menu is not visible in your sidebar, contact your system administrator.
+</Note>
+
+## Customer Activity Report
+
+Navigate to **Reports** in the sidebar, then click **Customers Report**. The portal loads the report at `/reports/customers-report`.
+
+### What the Report Shows
+
+The Customer Activity report returns one row per merchant matching your filters. Each row reflects the merchant's onboarding details and their linked terminals:
+
+| Column | Description |
+|---|---|
+| **Date Requested** | The timestamp when the merchant record was created in the system. |
+| **Application Type** | Whether this was a **New** merchant onboarding or a terminal **Replacement** for an existing merchant. |
+| **Merchant Name** | The registered business name of the merchant. |
+| **Branch** | The bank branch responsible for this merchant. |
+| **Region** | The bank region associated with the merchant's branch. |
+| **Terminal Serial Number** | All terminal serial numbers linked to the merchant's outlets, listed as a comma-separated string. |
+| **MID** | The Merchant ID(s) assigned across the merchant's device profiles, comma-separated. |
+| **Created By** | The portal username of the operator who created the merchant record. |
+| **Approved By** | The portal username of the operator who approved the merchant onboarding. |
+
+### Filtering the Customer Report
+
+Use the search panel to scope your results:
+
+- **Date Range** — Select a start and end date using the **Date Requested** filter to view only merchants onboarded in that window.
+- **Application Type** — Choose **New Customer** to see first-time onboardings, or **Replacement** to see existing merchants who received a new terminal.
+- **Merchant Name** — Enter a name to look up a specific merchant.
+- **Terminal Serial Number** — Filter to records associated with a specific device.
+
+Click **Search** to load the filtered results.
+
+<Tip>
+  Filter by **Application Type: New Customer** and export monthly to build a running record of portfolio growth for management reporting.
+</Tip>
+
+## Users Created Report
+
+Navigate to **Reports** in the sidebar, then click **Users Created**. The portal loads the report at `/reports/users-created`.
+
+### What the Report Shows
+
+The Users Created report lists all portal user accounts registered in the system. It is particularly useful for access audits, enabling you to confirm that every active account is still required and that permissions remain appropriate.
+
+| Column | Description |
+|---|---|
+| **Date Created** | The timestamp when the user account was provisioned. |
+| **Username** | The login username assigned to the user. |
+| **Workgroups** | The workgroups the user belongs to, comma-separated. |
+| **Roles** | The roles assigned to the user across all workgroups, comma-separated and deduplicated. Each role links to its permission detail view. |
+| **Created By** | The username of the operator who created the account. |
+| **Approved By** | The username of the operator who approved account creation. |
+| **Employee ID** | The employee identifier associated with the user. |
+| **Identification Number** | The national or institutional identification number on record. |
+| **Status** | **Active** or **Inactive** — whether the account is currently enabled. |
+| **Last Login** | The timestamp of the user's most recent login, or **Never** if the account has never been accessed. |
+
+<Tip>
+  Run the Users Created report as part of a **quarterly access review**. Export it to Excel, then cross-reference the Status and Last Login columns to identify accounts that should be deactivated or have their roles reviewed.
+</Tip>
+
+## Exporting Customer and User Reports
+
+Both reports support row-level selection and three export formats. You can select specific rows before exporting to limit the output to those records, or leave all rows unchecked to export the full filtered result set.
+
+<Steps>
+  <Step title="Select the report">
+    Open either the **Customers Report** or the **Users Created** report from the Reports sidebar.
+  </Step>
+  <Step title="Apply filters">
+    Set a date range and any additional filters relevant to your review. Click **Search** to load the matching records.
+  </Step>
+  <Step title="Select rows (optional)">
+    Check individual rows if you want to export a subset of the results, or leave all rows unchecked to export everything in the current filtered view.
+  </Step>
+  <Step title="Choose your export format">
+    Click the appropriate button in the top-right toolbar:
+    - **Export to CSV** — For loading into reconciliation or data tools.
+    - **Export to Excel** — For review and annotation in Microsoft Excel (`.xlsx`).
+    - **Export to PDF** — For formal submissions or printing (`Customers Reports.pdf` / `Users Created Reports.pdf`).
+  </Step>
+  <Step title="Download the file">
+    The browser downloads the file immediately with the relevant filename.
+  </Step>
+</Steps>
+
+### Exported Columns — Customers Report
+
+Date Requested, Merchant Name, Branch, Region, Terminal Serial Number, Merchant ID, Created By, Approved By, Application Type.
+
+### Exported Columns — Users Created Report
+
+Date Created, Username, Workgroups, Roles, Created By, Approved By, Employee ID, Identification Number, Status, Last Login.

@@ -1,0 +1,99 @@
+---
+title: "Authenticate and Access the Lango Portal Securely"
+sidebarTitle: "Authentication"
+description: "Sign in to Lango using your username and password, then verify your identity with a one-time password (OTP) for secure two-factor authentication."
+---
+
+Lango protects access to your institution's payment data with a mandatory two-step authentication process. Every login requires both your username and password and a time-limited one-time password (OTP) delivered to your registered email address. This two-factor approach ensures that even if credentials are compromised, unauthorised users cannot reach the portal without also controlling your email inbox.
+
+## How the Two-Step Login Works
+
+When you navigate to the Lango portal, you land on the **Institution Portal** login screen at `/user/login`. The first step verifies who you are (your credentials); the second step confirms it is really you right now (your OTP). Both steps must succeed before Lango grants you access to the dashboard.
+
+<Steps>
+
+  <Step title="Navigate to the Login Page">
+    Open your browser and go to your institution's Lango portal URL. Lango loads the **Institution Portal** login page at the path `/user/login`.
+
+    If you are already logged in and your session is still active, Lango redirects you automatically to the Dashboard — you do not need to log in again.
+  </Step>
+
+  <Step title="Enter Your Username and Password">
+    1. Type your **username** in the username field. Usernames are lowercase and contain no spaces — Lango converts any uppercase characters automatically.
+    2. Type your **password** in the password field.
+    3. Click **Submit**, or press **Enter** on your keyboard.
+
+    If your credentials are incorrect, Lango displays an error message. After several failed attempts, the system will show you how many attempts remain before your account is locked.
+
+    <Warning>
+      After too many consecutive failed login attempts, your account will be locked. Contact your system administrator to unlock it.
+    </Warning>
+  </Step>
+
+  <Step title="Enter Your One-Time Password (OTP)">
+    After a successful username and password check, Lango redirects you to the OTP verification page at `/user/otp`.
+
+    1. Check your registered email inbox for a message containing a **6-digit OTP**.
+    2. Enter the six digits in the OTP input fields on screen.
+    3. Click **Submit OTP**.
+
+    A countdown timer is displayed on the page. You must submit the OTP before this timer reaches zero.
+
+    <Warning>
+      OTPs are time-limited. If the countdown timer expires before you submit, the OTP becomes invalid and the **Submit OTP** button is replaced by a **Resend OTP** button. Click **Resend OTP** to request a fresh code, then enter the new code promptly.
+    </Warning>
+  </Step>
+
+  <Step title="Access the Dashboard">
+    On successful OTP verification, Lango immediately redirects you to the **Dashboard**. Your session is now active and you can navigate to any module you have permission to access.
+
+    If your account requires a password change at first login (or because your password has expired), Lango redirects you to the **Change Password** page at `/user/change-password` instead. Set a new password and log in again to reach the Dashboard.
+  </Step>
+
+</Steps>
+
+---
+
+## Forgot Password
+
+If you cannot remember your password, reset it without contacting your administrator:
+
+1. On the login page, click the **Forgot password** link beneath the password field.
+2. Lango takes you to the Forgot Password page at `/user/forgot-password`.
+3. Enter the **email address** registered to your Lango account and click **Reset Password**.
+4. Lango sends a password reset link to that address. Follow the link in the email to set a new password.
+5. Return to the login page and sign in with your new credentials.
+
+<Note>
+  The reset link in your email is single-use and time-limited. If the link has expired by the time you click it, return to `/user/forgot-password` and request a new one.
+</Note>
+
+---
+
+## Change Password
+
+Lango requires a password change in two scenarios: when an administrator has flagged your account to change at next login, or when your password has passed its expiry date. In both cases, Lango automatically redirects you to the Change Password page at `/user/change-password` before granting dashboard access.
+
+You can also change your password voluntarily at any time from your account profile (`/account/profile/change-password`) while you are logged in.
+
+To change your password:
+
+1. Enter your **new password** in the first field.
+2. Re-enter the same password in the **Confirm password** field.
+3. Click **Change Password**.
+
+<Tip>
+  **Password requirements** — Your password must be at least the minimum length configured by your administrator (typically 8 characters) and must include all of the following: an uppercase letter, a lowercase letter, a number, and a special character (e.g. `!`, `@`, `#`, `$`). A password-strength indicator on the page updates in real time as you type to help you meet these requirements.
+</Tip>
+
+---
+
+## Session Timeout
+
+Lango automatically monitors how long you have been inactive. When your session approaches the configured idle limit, a prompt appears asking whether you want to stay logged in. Click **No, Don't log me out** to reset the timer and continue working.
+
+If you do not respond in time, Lango logs you out automatically, clears your session, and redirects you to the login page. Any unsaved work will be lost, so save changes regularly.
+
+<Note>
+  Keep your credentials secure. Never share your username, password, or OTP with colleagues — each user should have their own named account. If you suspect your credentials have been compromised, change your password immediately from your account profile and notify your system administrator.
+</Note>

@@ -1,0 +1,213 @@
+---
+title: "Onboard and Manage Merchant Customers in Lango"
+sidebarTitle: "Customers"
+description: "Add merchants to Lango, manage their business details, assign customer types, and track their terminals and transactions from a single profile page."
+---
+
+The Customer Management module is your central hub for managing the merchants your bank serves. In Lango, a **customer** represents a business entity — such as a retailer, hotel, or agent — that owns one or more POS terminals deployed by your institution. From the customer list you can recruit new merchants, search and filter existing ones, and drill into any customer's full profile to view their outlets, terminals, transactions, and key contacts.
+
+---
+
+## Viewing the customer list
+
+Navigate to **Customer Management** in the left-hand sidebar. The page loads a paginated table titled **List of Customers** with the following columns:
+
+| Column | Description |
+|---|---|
+| **Customer Name** | The registered business name. Click the name to open the customer's profile. |
+| **Trading Name** | The name the business trades under (may differ from the registered name). |
+| **Customer Type** | The category assigned to this merchant (e.g., Retailer, Agent, Hotel). |
+| **Company Type** | The legal business structure (e.g., Sole Proprietor, Limited Company). |
+| **MCC Code** | The Merchant Category Code that classifies the business's industry. |
+| **TIN / PIN** | The merchant's tax identification or personal identification number. |
+| **Bank Branch** | The bank branch responsible for this customer's account. |
+| **Location** | The geographic region or locality of the merchant. |
+| **Phone Number** | The merchant's primary contact phone number. |
+| **Date Created** | The timestamp when the customer record was created in Lango. |
+| **Status** | Whether the customer account is **Active** or **Disabled**. |
+| **Application Type** | Shows **New** (green tag) for first-time merchants or **Existing** (blue tag) for replacements. |
+
+You can also click the **View** button (eye icon) in the **Action** column to open the customer's profile page directly.
+
+<Note>
+  You must have the `canViewCustomer` permission to access Customer Management. If the menu item does not appear in your sidebar, contact your system administrator to review your role.
+</Note>
+
+---
+
+## Creating a new customer
+
+Click the **Recruit Customer** button in the top-right corner of the customer list to open the customer creation form. This button is visible only to users with the `canCreateCustomer` permission.
+
+<Steps>
+  <Step title="Open the creation form">
+    Click **Recruit Customer** in the toolbar at the top-right of the List of Customers table.
+  </Step>
+  <Step title="Enter the business details">
+    Fill in the required fields in the form:
+
+    <ParamField body="Customer Name" type="string" required>
+      The merchant's full registered business name.
+    </ParamField>
+
+    <ParamField body="Trading Name" type="string">
+      The name the business uses in day-to-day trading, if different from the registered name.
+    </ParamField>
+
+    <ParamField body="Customer Type" type="select" required>
+      Select the category that best describes this merchant (e.g., Retailer, Agent). Customer types are configured under Master Data.
+    </ParamField>
+
+    <ParamField body="Company Type" type="select" required>
+      The legal business structure, such as Sole Proprietor, Partnership, or Limited Company.
+    </ParamField>
+
+    <ParamField body="Bank Branch" type="select" required>
+      The branch of your bank that manages this customer's relationship.
+    </ParamField>
+
+    <ParamField body="MCC (Merchant Category Code)" type="select" required>
+      Search for and select the four-digit industry code that classifies what the business sells or does.
+    </ParamField>
+
+    <ParamField body="TIN / PIN" type="string">
+      The merchant's tax identification number or personal identification number, as required by your institution.
+    </ParamField>
+
+    <ParamField body="Operation Address" type="string">
+      The physical address where the merchant operates.
+    </ParamField>
+
+    <ParamField body="Contact Person Name" type="string">
+      The name of the primary point of contact at the merchant's business.
+    </ParamField>
+
+    <ParamField body="Contact Person Phone" type="string">
+      The phone number for the primary contact.
+    </ParamField>
+
+    <ParamField body="Email" type="string">
+      The merchant's business email address.
+    </ParamField>
+  </Step>
+  <Step title="Submit the form">
+    Review all entered details and click **Submit**. A confirmation prompt will appear — click **OK** to confirm the creation.
+  </Step>
+  <Step title="Confirm the record appears">
+    After submission the form closes and the table refreshes. Search for the new customer by name to confirm the record was saved successfully.
+  </Step>
+</Steps>
+
+<Note>
+  If your system has **maker-checker** enabled, creating a new customer will generate an approval task rather than immediately adding the record. A user with the appropriate approval role must review and approve the task before the customer becomes active.
+</Note>
+
+---
+
+## Viewing a customer profile
+
+Click any **Customer Name** link in the table to open that merchant's detail page. The top of the page shows a summary card with key fields such as name, operation address, contact details, MCC, bank branch, status, and customer type.
+
+Below the summary, a tabbed panel labelled **Customer Details** provides access to all sub-sections of the customer record:
+
+<CardGroup cols={2}>
+  <Card title="Bio Details" icon="id-card">
+    Extended business information captured during onboarding, including company registration details and additional form fields configured by your institution.
+  </Card>
+  <Card title="Dashboard" icon="chart-line">
+    A real-time summary of transaction volumes and terminal health for this customer. Visible only to users with the `canViewTransaction` permission.
+  </Card>
+  <Card title="Outlets" icon="store">
+    All physical or logical business locations registered under this customer. Click an outlet name to manage its terminals, device profiles, and operators.
+  </Card>
+  <Card title="Terminals" icon="credit-card">
+    A list of all POS terminals assigned to this customer across all outlets.
+  </Card>
+  <Card title="Transactions" icon="receipt">
+    The full transaction history for this customer. Visible only to users with the `canViewTransaction` permission.
+  </Card>
+  <Card title="Terminal Information" icon="server">
+    A real-time estate dashboard showing the live connection status and health of each terminal.
+  </Card>
+  <Card title="Customer Users" icon="users">
+    Portal users linked to this merchant (such as merchant-side staff). Visible to users with the `canViewMerchantUser` permission.
+  </Card>
+  <Card title="Notifications" icon="bell">
+    System notifications associated with this customer record.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Use the **Outlets** tab to manage a customer's business locations and configure terminal profiles. See [Managing Outlets](/customers/outlets) for detailed steps.
+</Tip>
+
+---
+
+## Editing customer details
+
+You can update a customer's core details from their profile page.
+
+<Steps>
+  <Step title="Open the customer profile">
+    In the customer list, click the customer's name or the **View** button to open their profile.
+  </Step>
+  <Step title="Locate the action menu">
+    In the top-right corner of the **Customer Details** card, click the **Actions** dropdown to reveal the available actions for this record.
+  </Step>
+  <Step title="Select Edit">
+    Click **Edit** from the action menu to open the edit form, pre-populated with the customer's current details.
+  </Step>
+  <Step title="Make your changes">
+    Update any fields that need changing — such as trading name, contact details, bank branch, or MCC — then click **Submit**.
+  </Step>
+  <Step title="Confirm the update">
+    A confirmation prompt will appear. Click **OK** to save the changes. The profile page will reload with the updated information.
+  </Step>
+</Steps>
+
+<Note>
+  Editing requires the `canUpdateCustomer` permission. If maker-checker is enabled, edits will be queued for approval before taking effect.
+</Note>
+
+---
+
+## Deleting a customer
+
+To remove a customer record, open the customer's profile, click the **Actions** dropdown, and select **Delete**. Confirm the action when prompted.
+
+<Warning>
+  Deleting a customer is irreversible and will remove their record from Lango. Ensure the customer has no active terminals before proceeding. This action requires the `canDeleteCustomer` permission and may require maker-checker approval depending on your system configuration.
+</Warning>
+
+---
+
+## Filtering and searching
+
+The customer list includes a built-in search toolbar above the table. You can filter the list using any combination of the following criteria:
+
+<Tabs>
+  <Tab title="By Name">
+    Type in the **Customer Name** search box. The field uses a searchable dropdown — begin typing and select a matching name from the suggestions.
+  </Tab>
+  <Tab title="By Customer Type">
+    Select a **Customer Type** from the dropdown to show only merchants of a specific category (e.g., Agent, Retailer).
+  </Tab>
+  <Tab title="By Bank Branch">
+    Select a **Bank Branch** to narrow the list to customers managed by a particular branch.
+  </Tab>
+  <Tab title="By MCC Code">
+    Search by **MCC Code** to find merchants in a specific industry. The dropdown shows both the code and the category name for easy identification.
+  </Tab>
+  <Tab title="By Date Range">
+    Use the **Date Created** date-range picker to show only customers onboarded within a specific period.
+  </Tab>
+  <Tab title="By Application Type">
+    Use the **Application Type** filter to show **New Customer** applications or **Replacement** applications separately.
+  </Tab>
+</Tabs>
+
+Click **Search** to apply the active filters, or **Reset** to clear all filters and return to the full customer list.
+
+<Tip>
+  You can combine multiple filters at the same time — for example, filtering by Customer Type and Bank Branch together to find all agents managed by a specific branch.
+</Tip>

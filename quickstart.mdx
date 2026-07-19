@@ -1,47 +1,98 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with Lango Payment Platform"
+sidebarTitle: "Quickstart"
+description: "Learn how to log in, navigate the Lango portal, and complete your first key tasks — from onboarding a merchant to reviewing transactions."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+This guide walks you through the five most important things you will do in Lango as a new user. By the end, you will have logged in, explored the dashboard, onboarded a merchant, found a transaction, and generated a report — giving you a solid foundation to work from every day.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Log In to the Portal">
+    Open your browser and navigate to your institution's Lango portal URL. You will land on the **Institution Portal** login page.
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+    1. Enter your **username** (all lowercase, no spaces) in the username field.
+    2. Enter your **password** in the password field.
+    3. Click **Submit** (or press **Enter**).
+    4. Lango redirects you to the OTP verification page. Enter the **6-digit one-time password** sent to your registered email address, then click **Submit OTP**.
+    5. On successful verification, Lango redirects you directly to the **Dashboard**.
 
-    ```bash
-    your-cli start
-    ```
+    <Note>
+      If this is your first login or your password has expired, Lango will redirect you to the **Change Password** page before you can proceed. Set a new password that meets the complexity requirements, then log in again.
+    </Note>
   </Step>
+
+  <Step title="Explore the Dashboard">
+    The Dashboard is your at-a-glance view of the entire payments estate. It contains two distinct views accessible from the left sidebar under **Dashboards**:
+
+    - **Terminals Telemetry** (`/dashboard/all-terminals`) — Shows the live status of every terminal in your estate. Select any terminal to drill down into its details, operators, and recent transactions.
+    - **Transactions Dashboard** (`/dashboard/transaction-dashboard`) — Displays aggregated transaction activity, giving you a quick read on volumes, trends, and anomalies across your POS estate.
+
+    Spend a few minutes here to familiarise yourself with the layout. Use the sidebar to move between modules at any time.
+
+    <Tip>
+      Your role determines which dashboard views you can see. If a view is not visible in the sidebar, contact your system administrator to review your workgroup permissions.
+    </Tip>
+  </Step>
+
+  <Step title="Onboard Your First Customer">
+    A **customer** in Lango is a merchant or business entity that your bank has approved to accept card payments. Follow these steps to set one up completely:
+
+    1. Click **Customer Management** in the left sidebar.
+    2. Click **Create Customer** and fill in the customer's business details — name, customer type, company type, merchant category (MCC), and contact information. Submit the form.
+    3. Open the newly created customer record and navigate to the **Outlets** tab. Click **Add Outlet** to register the customer's physical trading location.
+    4. Within the outlet, open the **Terminals** tab and click **Assign Terminal** to link a POS device from your inventory to this outlet.
+
+    <Note>
+      If maker-checker is enabled on your system, creating a customer or assigning a terminal will generate a task that a second authorised user must approve before the record becomes active. Check the **Tasks** inbox in the sidebar to track pending approvals.
+    </Note>
+  </Step>
+
+  <Step title="Review a Transaction">
+    Once terminals are active and processing, you can inspect individual transactions from the **Transactions** module.
+
+    1. Click **Transactions** in the left sidebar to open the full transactions list.
+    2. Use the search and filter controls at the top of the table to narrow results by:
+       - **Reference number** — paste the exact transaction reference for an instant match.
+       - **Date range** — select a start and end date to view all transactions within a period.
+       - Additional filters such as terminal ID, merchant, or transaction status are also available.
+    3. Click any row to open the **Transaction Details** page, where you can see the full breakdown: amount, card scheme, terminal, outlet, operator, response code, and timestamps.
+
+    <Tip>
+      You can also reach transaction details from within a customer's record, a specific outlet, or directly from a terminal on the dashboard — useful when you are already investigating a particular device or merchant.
+    </Tip>
+  </Step>
+
+  <Step title="Run Your First Report">
+    Lango's **Reports** module lets you produce compliance-ready exports across customers, terminals, and transactions.
+
+    1. Click **Reports** in the left sidebar to expand the reports menu.
+    2. To review system activity, select **Audit Trails** (`/reports/audit-trail`). This log records every action taken in the portal — who did what, and when.
+    3. To export transaction data, navigate to **Transactions Reports** and choose the report type that matches your need (e.g. Local Purchase, Failed Transactions, or a Summary report).
+    4. Apply the relevant date range and any additional filters, then click **Export** to download the report as a CSV file.
+
+    <Tip>
+      The **Customers Reports** and **Terminals Reports** sections provide dedicated exports for merchant and device data — useful for periodic reconciliation and regulatory submissions.
+    </Tip>
+  </Step>
+
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Next Steps
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+Now that you have completed the core workflow, explore these sections to go deeper:
+
+<CardGroup cols={2}>
+  <Card title="Dashboard Overview" icon="chart-line" href="/dashboard/overview">
+    Master terminal telemetry and the transactions dashboard.
+  </Card>
+  <Card title="Managing Customers" icon="users" href="/customers/managing-customers">
+    Full guide to creating customers, outlets, profiles, and operators.
+  </Card>
+  <Card title="Viewing Transactions" icon="credit-card" href="/transactions/viewing-transactions">
+    Search, filter, and analyse transaction records.
+  </Card>
+  <Card title="Audit Trails" icon="file-lines" href="/reports/audit-trails">
+    Generate and export audit trail and compliance reports.
+  </Card>
+</CardGroup>

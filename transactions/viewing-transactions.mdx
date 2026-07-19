@@ -1,0 +1,158 @@
+---
+title: "Search and Filter Transactions Across Your Terminal Estate"
+sidebarTitle: "Transactions"
+description: "The Transactions module gives you a searchable, filterable ledger of every payment processed through your POS network, with CSV export for reconciliation."
+---
+
+The Transactions module is your central ledger for every payment event processed across all POS terminals in your network. From a single screen at `/transactions`, your operations and compliance teams can search by reference number, narrow results by date range, isolate activity to a specific terminal or operator, and export the resulting dataset as a CSV file for downstream reconciliation and reporting.
+
+<Note>
+  Access to the Transactions module requires the **`canViewTransaction`** permission (`standard.transaction.view`). If you do not see **Transactions** in the left sidebar, contact your system administrator to have this permission added to your role.
+</Note>
+
+---
+
+## Navigating to Transactions
+
+Select **Transactions** from the left-hand navigation sidebar. The portal opens the full transaction list at `/transactions`, pre-sorted with the most recent payment events at the top. All terminals your account has visibility over are included in this view by default.
+
+---
+
+## The Transaction Table
+
+The table presents one row per payment event. Scroll horizontally to reveal all columns — the table is wide by design to surface the full context of each transaction without requiring you to open the detail view.
+
+<CardGroup cols={2}>
+  <Card title="Reference Number (RRN)" icon="fingerprint">
+    The Retrieval Reference Number assigned by the payment switch. Use the RRN to match a Lango record to your switch or card-scheme statement.
+  </Card>
+  <Card title="Transaction Date" icon="calendar">
+    The date and time the transaction was recorded, displayed in your local timezone in `YYYY-MM-DD, hh:mm:ss` format.
+  </Card>
+  <Card title="Terminal Serial Number" icon="barcode">
+    The physical serial number of the POS terminal that processed the payment, sourced from the device profile.
+  </Card>
+  <Card title="Transaction Status" icon="circle-check">
+    The outcome of the payment — `SUCCESSFUL` or `DECLINED` — as returned by the payment switch.
+  </Card>
+  <Card title="Response Code" icon="code">
+    The numeric response code from the switch, displayed alongside its human-readable message (for example, `00 : Approved`).
+  </Card>
+  <Card title="Amount" icon="coins">
+    The transaction amount formatted to two decimal places, prefixed with the currency symbol (for example, `TZS 15,000.00`).
+  </Card>
+  <Card title="Card Number (PAN)" icon="credit-card">
+    The masked Primary Account Number of the card used. This field is display-only and is not searchable.
+  </Card>
+  <Card title="Transaction Type" icon="arrow-right-arrow-left">
+    The class of payment event — such as `SALE`, `REFUND`, `CASHBACK`, `BILL PAYMENT`, `PREAUTH`, and others.
+  </Card>
+  <Card title="Entry Mode" icon="keyboard">
+    How the card data was captured — for example, chip, swipe, or contactless.
+  </Card>
+  <Card title="Customer Name" icon="building">
+    The merchant customer the terminal belongs to. Click the name to navigate directly to that customer's profile.
+  </Card>
+  <Card title="Outlet Name" icon="store">
+    The specific outlet where the terminal is deployed. Click the name to navigate to the outlet record.
+  </Card>
+  <Card title="Operator" icon="user">
+    The operator who was logged in to the terminal when the transaction was processed.
+  </Card>
+  <Card title="TID" icon="tag">
+    The Terminal ID assigned in the device profile, used to identify the terminal at the switch level.
+  </Card>
+  <Card title="MID" icon="hashtag">
+    The Merchant ID associated with the transaction at the switch level.
+  </Card>
+  <Card title="Owner" icon="flag">
+    Indicates whether the transaction is **On-us** (card issued by your institution) or **Off-us** (card issued by another institution).
+  </Card>
+</CardGroup>
+
+---
+
+## Filtering Transactions
+
+Use the search and filter bar above the table to narrow the transaction list. You can combine multiple filters — all active filters are applied together when you click **Search**.
+
+<Steps>
+  <Step title="Open the filter bar">
+    The filter controls are displayed directly above the transaction table. They are always visible — no additional click is required to expand them.
+  </Step>
+  <Step title="Search by Reference Number (RRN)">
+    Type a full or partial RRN into the **Reference Number** field. This is the fastest way to locate a single, known transaction.
+  </Step>
+  <Step title="Set a date range">
+    Click the **Transaction Date** date-range picker and select a **From** date and a **To** date. Lango converts your selection to full ISO timestamps when querying the database, so you retrieve every transaction that occurred within your chosen window — including those on the boundary dates.
+  </Step>
+  <Step title="Filter by terminal, customer, outlet, or operator">
+    Use the remaining filter fields as needed:
+
+    - **Terminal Serial Number** — enter the serial number printed on the device.
+    - **Customer Name** — start typing to search and select from a live-loading customer list.
+    - **Outlet Name** — start typing to search and select from a live-loading outlet list.
+    - **Operator** — start typing to search and select from a live-loading operator list.
+    - **Transaction Type** — choose a specific transaction class from the dropdown (for example, `SALE` or `REFUND`).
+    - **Transaction Status** — choose `SUCCESSFUL` or `DECLINED` from the dropdown.
+  </Step>
+  <Step title="Apply the filters">
+    Click **Search** (or the equivalent query button in the toolbar) to reload the table with only the transactions that match all active criteria.
+  </Step>
+</Steps>
+
+<Tip>
+  Combine the **Transaction Date** range with the **Terminal Serial Number** filter for quick terminal-level reconciliation. This limits results to a single device over a specific settlement period, making it straightforward to tally totals and compare them against your switch reports.
+</Tip>
+
+---
+
+## Transaction Statuses
+
+Lango displays the status value returned by the payment switch. The most common values you will encounter are listed below.
+
+<Tabs>
+  <Tab title="SUCCESSFUL">
+    The payment switch approved the transaction and funds were captured. The response code is typically `00`.
+  </Tab>
+  <Tab title="DECLINED">
+    The payment switch rejected the transaction. The response code and message fields provide the specific reason — for example, insufficient funds, expired card, or do-not-honour.
+  </Tab>
+  <Tab title="PENDING">
+    The transaction was initiated but a final approval or decline response has not yet been recorded. This status may appear briefly during high-latency switch communication or network interruption.
+  </Tab>
+  <Tab title="REVERSED">
+    The original transaction was voided or reversed after approval. Lango records the reversal event against the original transaction entry.
+  </Tab>
+</Tabs>
+
+---
+
+## Exporting Transactions
+
+You can export the currently loaded transaction set to a CSV file for use in reconciliation tools, spreadsheets, or compliance reporting. The export includes additional fields not shown in the table — such as AID, invoice number, card issuer, and batch number.
+
+<Steps>
+  <Step title="Apply your filters">
+    Use the filter bar to narrow results to the date range, terminal, customer, or status you need before exporting. The export covers the current query result.
+  </Step>
+  <Step title="Select rows (optional)">
+    If you only need a subset of the loaded results, tick the checkboxes on individual rows or use **Select All** / **Invert Selection** from the row-selection toolbar. When rows are selected, the export button changes to **Export Selected**.
+  </Step>
+  <Step title="Click Export">
+    Click the **Export All** or **Export Selected** button in the table toolbar. Lango prepares the CSV using your currently filtered and/or selected data.
+  </Step>
+  <Step title="Download the file">
+    Your browser downloads a file named `Transactions_Report.csv`. Open it in your preferred spreadsheet application or import it directly into your reconciliation system.
+  </Step>
+</Steps>
+
+<Note>
+  The CSV includes the following columns: Reference Number, AID, Amount, Card Issuer, Entry Mode, MID, TID, Terminal Serial Number, Operator Name, Customer Name, Outlet Name, Invoice Number, Response Code, Message, PAN, Status, Transaction Date, and Transaction Type.
+</Note>
+
+---
+
+## Next Steps
+
+Once you locate a transaction in the list, click the <Icon icon="eye" /> **View** icon in the **Action** column to open the full payment record. See [Transaction Details](/transactions/transaction-details) for a complete breakdown of every field on the detail page.

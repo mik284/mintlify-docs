@@ -1,0 +1,189 @@
+---
+title: "Add and Manage Terminal Operators for Your Merchants"
+sidebarTitle: "Operators"
+description: "Operators are the individuals who use POS terminals on behalf of a merchant. Assign operators to terminals and manage their access and activity in Lango."
+---
+
+An **operator** is a person — such as a cashier, teller, or agent — who is authorised to process transactions on a specific POS terminal. In Lango, operators are linked to a terminal through the terminal profile (device profile) assigned to that terminal's outlet. Each operator has their own credentials and PIN, which the terminal uses to identify who processed each transaction. Managing operators lets you control exactly who can use each device, audit individual activity, and respond quickly when access needs to be changed.
+
+---
+
+## Viewing operators
+
+Operators are accessed through the terminal profile on the outlet's detail page.
+
+<Steps>
+  <Step title="Navigate to the customer profile">
+    Go to **Customer Management** in the sidebar and click the relevant customer's name to open their profile.
+  </Step>
+  <Step title="Open the outlet">
+    Click the **Outlets** tab, then click the outlet name where the terminal is located.
+  </Step>
+  <Step title="Open the terminal profile">
+    In the outlet detail page, click the **Terminal Profiles** tab. Click the terminal profile name to open its detail view.
+  </Step>
+  <Step title="View the Operators tab">
+    Within the terminal profile detail page, click the **Operators** tab to see all operators assigned to that terminal profile.
+  </Step>
+</Steps>
+
+The operators table shows the following information for each operator:
+
+| Column | Description |
+|---|---|
+| **Name** | The operator's full name. |
+| **Username** | The operator's login username on the POS terminal. |
+| **Operator Code** | The unique code assigned to this operator. |
+| **Phone Number** | The operator's registered phone number. |
+| **Email** | The operator's email address. |
+| **Gender** | The operator's gender, as recorded during setup. |
+| **Identification Type** | The type of ID used to verify the operator (e.g., National ID, Passport). |
+| **Identification Number** | The operator's ID document number. |
+| **POS Permissions** | The POS role assigned to this operator, which determines what they can do on the terminal. |
+| **Status** | Whether the operator is **Active** or **Inactive**. |
+| **Date Created** | When the operator record was created. |
+
+<Note>
+  You need the `canViewOperator` permission to see the Operators tab and its contents.
+</Note>
+
+---
+
+## Adding an operator
+
+To add a new operator to a terminal, navigate to the terminal profile as described above and use the **Add Operator** button in the toolbar.
+
+<Steps>
+  <Step title="Open the terminal profile">
+    From the outlet's **Terminal Profiles** tab, click the name of the terminal profile you want to assign the operator to.
+  </Step>
+  <Step title="Go to the Operators tab">
+    Click the **Operators** tab within the terminal profile detail page.
+  </Step>
+  <Step title="Click Add Operator">
+    Click the **Add Operator** button in the top-right corner of the operators table. This button is visible only to users with the `canCreateOperator` permission.
+  </Step>
+  <Step title="Fill in the operator details">
+    Complete the form with the following information:
+
+    <ParamField body="Name" type="string" required>
+      The operator's full name.
+    </ParamField>
+
+    <ParamField body="Username" type="string" required>
+      The username the operator will use to log in to the POS terminal.
+    </ParamField>
+
+    <ParamField body="Phone Number" type="string" required>
+      The operator's mobile phone number, including the country code.
+    </ParamField>
+
+    <ParamField body="Email" type="string">
+      The operator's email address.
+    </ParamField>
+
+    <ParamField body="Gender" type="select">
+      Select the operator's gender from the dropdown.
+    </ParamField>
+
+    <ParamField body="Identification Type" type="select" required>
+      The type of identification document (e.g., National ID, Passport, Driving Licence).
+    </ParamField>
+
+    <ParamField body="Identification Number" type="string" required>
+      The document number from the selected identification type.
+    </ParamField>
+
+    <ParamField body="POS Permissions" type="select">
+      The POS role to assign to this operator. The available roles are determined by the customer type and your system's POS permission configuration.
+    </ParamField>
+  </Step>
+  <Step title="Submit and confirm">
+    Click **Submit** and confirm the prompt. The operator is added to the terminal profile and can now log in to the terminal with their assigned credentials.
+  </Step>
+</Steps>
+
+---
+
+## Activating and deactivating operators
+
+You can toggle an operator's status to control whether they can currently process transactions on the terminal.
+
+<Steps>
+  <Step title="Open the operators list">
+    Navigate to the terminal profile's **Operators** tab as described in the Viewing section above.
+  </Step>
+  <Step title="Select the operator">
+    Click the checkbox next to the operator's row in the table, or click the operator's name to open their detail page.
+  </Step>
+  <Step title="Choose Activate or Deactivate">
+    From the **Actions** dropdown (visible after selection), choose **Activate** to restore access, or **Deactivate** to remove it. Confirm the action in the prompt.
+  </Step>
+</Steps>
+
+<Warning>
+  Deactivating an operator takes effect immediately. The operator will be unable to process any transactions on that terminal from the moment the deactivation is confirmed. Use this action promptly if an operator's credentials are compromised or if they leave your merchant's employment.
+</Warning>
+
+<Note>
+  Activating and deactivating operators requires the `canActivateOperator` permission. If your role does not include this permission, the Activate / Deactivate action will not appear in the menu.
+</Note>
+
+---
+
+## Resetting an operator
+
+Use the **Reset** action to clear an operator's PIN or credentials on the terminal — for example, if an operator has forgotten their PIN or their account has been locked after too many failed attempts.
+
+<Steps>
+  <Step title="Open the operators list">
+    Navigate to the terminal profile's **Operators** tab.
+  </Step>
+  <Step title="Select the operator">
+    Click the checkbox next to the operator or open their detail page.
+  </Step>
+  <Step title="Select Reset">
+    Click **Reset** from the **Actions** dropdown. Confirm the action when prompted.
+  </Step>
+  <Step title="Notify the operator">
+    After the reset completes, inform the operator so they can set a new PIN the next time they log in to the terminal.
+  </Step>
+</Steps>
+
+<Note>
+  The **Reset** action requires the `canResetOperator` permission. If you do not see this option, contact your system administrator to check your role assignment.
+</Note>
+
+---
+
+## Viewing operator transactions
+
+You can review the full transaction history for an individual operator to audit activity or investigate a specific incident.
+
+<Steps>
+  <Step title="Open the operator detail page">
+    From the terminal profile's **Operators** tab, click the operator's name to open their detail page.
+  </Step>
+  <Step title="View the Transactions tab">
+    Click the **Transactions** tab on the operator detail page to see every transaction processed by this operator, including date, time, amount, and status.
+  </Step>
+</Steps>
+
+<Tip>
+  Operator-level transaction history is the most granular view available in Lango. Use it when you need to attribute specific transactions to an individual rather than reviewing totals at the terminal or outlet level.
+</Tip>
+
+---
+
+## Operator permissions summary
+
+The following permissions control what actions you can perform on operator records. Contact your system administrator if you need a permission added to your role.
+
+| Permission | What it allows |
+|---|---|
+| `canViewOperator` | View the operators list and operator detail pages. |
+| `canCreateOperator` | Add new operators to a terminal profile. |
+| `canUpdateOperator` | Edit an operator's details (name, contact information, ID, POS role). |
+| `canDeleteOperator` | Remove an operator record permanently. |
+| `canActivateOperator` | Activate or deactivate an operator's terminal access. |
+| `canResetOperator` | Reset an operator's PIN or credentials. |
