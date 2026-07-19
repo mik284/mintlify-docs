@@ -83,5 +83,11 @@
         ]
       }
     ]
+  },
+  "interaction": {
+    "drilldown": false
+  },
+  "icons": {
+    "library": "lucide"
   }
 }
