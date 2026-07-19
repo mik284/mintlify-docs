@@ -1,14 +1,14 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Lango Docs",
-  "theme": "willow",
+  "theme": "mint",
   "favicon": {
     "light": "/images/lango_icon.png",
     "dark": "/images/lango_icon.png"
   },
   "colors": {
     "primary": "#198dfb",
-    "light": "#f54755"
+    "light": "#0485f3"
   },
   "navbar": {
     "primary": {
