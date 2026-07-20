@@ -11,10 +11,7 @@
     "light": "#0485f3"
   },
   "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/mik284/lango_portal"
-    }
+   
   },
   "navigation": {
     "tabs": [
